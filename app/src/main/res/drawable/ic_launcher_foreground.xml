@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Roman Pillar (Left) -->
+    <path
+        android:fillColor="#C2B280"
+        android:pathData="M28,47 h15 v35 h-15 z" /> <!-- Column Shaft -->
+    <path
+        android:fillColor="#C2B280"
+        android:pathData="M25,37 q10.5,0 21,0 l-3,10 h-15 z" /> <!-- Capital Core -->
+    <path
+        android:fillColor="#A68D60"
+        android:pathData="M22,37 a7,7 0 1,0 0,14 a7,7 0 0,0 0,-14 M49,37 a7,7 0 1,1 0,14 a7,7 0 0,1 0,-14" /> <!-- Volutes -->
+    <path
+        android:fillColor="#D2C4A3"
+        android:pathData="M18,32 h35 v5 h-35 z" /> <!-- Abacus -->
+
+    <!-- Roman Scroll (Right, Overlapping) -->
+    <path
+        android:fillColor="#FDF5E6"
+        android:pathData="M45,35 h35 v42 h-35 z" /> <!-- Parchment -->
+    <path
+        android:fillColor="#E1C16E"
+        android:pathData="M42,30 h41 v8 q-20.5,2 -41,0 z" /> <!-- Top Roller -->
+    <path
+        android:fillColor="#E1C16E"
+        android:pathData="M42,75 h41 v8 q-20.5,-2 -41,0 z" /> <!-- Bottom Roller -->
+
+    <!-- Scroll "Writing" -->
+    <path
+        android:fillAlpha="0.6"
+        android:fillColor="#5D4037"
+        android:pathData="M52,45 h22 v1.5 h-22 z M52,52 h22 v1.5 h-22 z M52,59 h22 v1.5 h-22 z M52,66 h15 v1.5 h-15 z" />
+
+</vector>

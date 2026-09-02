@@ -1,0 +1,30 @@
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Gradle
+.gradle/
+build/
+app/build/
+
+# Kotlin
+.kotlin/
+
+# Local configuration
+local.properties
+.env
+debug.keystore
+
+# System
+.DS_Store
+Thumbs.db
+
+# OS-specific
+capture/
+
+# Metadata (Specific to AI assistants)
+.artifacts/
+metadata.json
+assets/

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background Layer (Circular) -->
+    <path
+        android:fillColor="#F5F5DC"
+        android:pathData="M54,54m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+
+    <!-- Foreground Elements (Same as square but slightly smaller to fit circle) -->
+    <!-- Pillar -->
+    <path
+        android:fillColor="#C2B280"
+        android:pathData="M32,49 h12 v30 h-12 z" />
+    <path
+        android:fillColor="#A68D60"
+        android:pathData="M27,41 a5,5 0 1,1 0,10 a5,5 0 0,1 0,-10 M44,41 a5,5 0 1,1 0,10 a5,5 0 0,1 0,-10" />
+    <path
+        android:fillColor="#D2C4A3"
+        android:pathData="M25,37 h26 v4 h-26 z" />
+
+    <!-- Scroll -->
+    <path
+        android:fillColor="#FDF5E6"
+        android:pathData="M48,40 h28 v34 h-28 z" />
+    <path
+        android:fillColor="#E1C16E"
+        android:pathData="M46,36 h32 v5 q-16,1.5 -32,0 z" />
+    <path
+        android:fillColor="#E1C16E"
+        android:pathData="M46,72 h32 v5 q-16,-1.5 -32,0 z" />
+</vector>

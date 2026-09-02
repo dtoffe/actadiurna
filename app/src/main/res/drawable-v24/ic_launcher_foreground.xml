@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Roman Pillar (Left) -->
+    <!-- Column Shaft with cylindrical shading -->
+    <path android:pathData="M28,47 h15 v35 h-15 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="28"
+                android:startY="65"
+                android:endX="43"
+                android:endY="65"
+                android:type="linear">
+                <item android:offset="0" android:color="#A68D60" />
+                <item android:offset="0.5" android:color="#C2B280" />
+                <item android:offset="1" android:color="#8C734D" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Capital Core (Bell shape) -->
+    <path
+        android:fillColor="#C2B280"
+        android:pathData="M25,37 q10.5,0 21,0 l-3,10 h-15 z" />
+
+    <!-- Volutes (Ionic spirals) with shading -->
+    <path android:pathData="M22,37 a7,7 0 1,0 0,14 a7,7 0 0,0 0,-14 M49,37 a7,7 0 1,1 0,14 a7,7 0 0,1 0,-14">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="22"
+                android:startY="37"
+                android:endX="49"
+                android:endY="51"
+                android:type="linear">
+                <item android:offset="0" android:color="#8C734D" />
+                <item android:offset="1" android:color="#A68D60" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Abacus (Top flat part) -->
+    <path
+        android:fillColor="#D2C4A3"
+        android:pathData="M18,32 h35 v5 h-35 z" />
+
+    <!-- Roman Scroll (Right, Overlapping) -->
+    <!-- Parchment with curved shading -->
+    <path android:pathData="M45,35 h35 v42 h-35 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="45"
+                android:startY="56"
+                android:endX="80"
+                android:endY="56"
+                android:type="linear">
+                <item android:offset="0" android:color="#E0D7C1" />
+                <item android:offset="0.1" android:color="#FDF5E6" />
+                <item android:offset="0.9" android:color="#FDF5E6" />
+                <item android:offset="1" android:color="#D6CCB0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Top Roller (Cylindrical) -->
+    <path android:pathData="M42,30 h41 v8 q-20.5,2 -41,0 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="62.5"
+                android:startY="30"
+                android:endX="62.5"
+                android:endY="38"
+                android:type="linear">
+                <item android:offset="0" android:color="#A68D60" />
+                <item android:offset="0.5" android:color="#E1C16E" />
+                <item android:offset="1" android:color="#8C734D" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Bottom Roller (Cylindrical) -->
+    <path android:pathData="M42,75 h41 v8 q-20.5,-2 -41,0 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="62.5"
+                android:startY="75"
+                android:endX="62.5"
+                android:endY="83"
+                android:type="linear">
+                <item android:offset="0" android:color="#A68D60" />
+                <item android:offset="0.5" android:color="#E1C16E" />
+                <item android:offset="1" android:color="#8C734D" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Scroll "Writing" (Subtle lines) -->
+    <path
+        android:fillAlpha="0.6"
+        android:fillColor="#5D4037"
+        android:pathData="M52,45 h22 v1.5 h-22 z M52,52 h22 v1.5 h-22 z M52,59 h22 v1.5 h-22 z M52,66 h15 v1.5 h-15 z" />
+
+</vector>
