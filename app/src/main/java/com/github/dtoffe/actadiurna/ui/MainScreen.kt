@@ -69,6 +69,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.github.dtoffe.actadiurna.BuildConfig
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.StatusFilter
 import com.github.dtoffe.actadiurna.ui.components.EditTaskDialog
@@ -183,14 +184,16 @@ fun MainScreen(
                                     viewModel.archiveCompleted()
                                 }
                             )
-                            DropdownMenuItem(
-                                text = { Text("Reset to sample file") },
-                                leadingIcon = { Icon(Icons.Default.Refresh, contentDescription = null) },
-                                onClick = {
-                                    showMenu = false
-                                    viewModel.resetToSample()
-                                }
-                            )
+                            if (BuildConfig.DEBUG) {
+                                DropdownMenuItem(
+                                    text = { Text("Reset to sample file") },
+                                    leadingIcon = { Icon(Icons.Default.Refresh, contentDescription = null) },
+                                    onClick = {
+                                        showMenu = false
+                                        viewModel.resetToSample()
+                                    }
+                                )
+                            }
                         }
                     }
                 },

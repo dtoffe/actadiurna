@@ -23,7 +23,10 @@ class TodoRepository(private val context: Context) {
     private val _items = MutableStateFlow<List<TodoItem>>(emptyList())
     val items: StateFlow<List<TodoItem>> = _items.asStateFlow()
 
-    private val defaultSampleContent = """
+    private val initialWelcomeTask: String
+        get() = "(A) ${TodoParser.todayDateString()} Welcome to Acta Diurna @context +project"
+
+    private val debugSampleContent = """
 (A) 2026-08-08 Welcome to todo.txt! @app +tutorial due:2026-08-17
 (A) 2026-08-17 Review important project tasks +work @office
 (B) 2026-08-15 Buy coffee beans @groceries +home
@@ -34,7 +37,7 @@ x 2026-08-17 2026-08-17 Completed setup task @app
 
     suspend fun loadInitialData() = withContext(Dispatchers.IO) {
         if (!todoFile.exists()) {
-            todoFile.writeText(defaultSampleContent)
+            todoFile.writeText(initialWelcomeTask)
         }
         val content = todoFile.readText()
         updateContentState(content)
@@ -135,6 +138,6 @@ x 2026-08-17 2026-08-17 Completed setup task @app
     }
 
     suspend fun resetToSample() = withContext(Dispatchers.IO) {
-        saveRawContent(defaultSampleContent)
+        saveRawContent(debugSampleContent)
     }
 }
