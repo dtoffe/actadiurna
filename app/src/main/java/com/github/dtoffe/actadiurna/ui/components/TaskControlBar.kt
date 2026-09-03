@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,6 +31,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.github.dtoffe.actadiurna.model.TodoItem
+import com.github.dtoffe.actadiurna.ui.theme.TodoIcons
 
 @Composable
 fun TaskControlBar(
@@ -36,6 +40,7 @@ fun TaskControlBar(
     availableProjects: List<String>,
     onAddClick: () -> Unit,
     onEditClick: (TodoItem) -> Unit,
+    onDeleteClick: (TodoItem) -> Unit,
     onPriorityChange: (TodoItem, Char?) -> Unit,
     onContextToggle: (TodoItem, String) -> Unit,
     onProjectToggle: (TodoItem, String) -> Unit,
@@ -61,26 +66,38 @@ fun TaskControlBar(
         ) {
             // 1. Add / Edit Button
             FilterChip(
-                modifier = Modifier.weight(1.2f),
+                modifier = Modifier.weight(if (selectedTask != null) 1f else 1.2f),
                 selected = false,
                 onClick = {
                     if (selectedTask != null) onEditClick(selectedTask) else onAddClick()
                 },
                 label = {
-                    Text(
-                        text = if (selectedTask != null) "Edit" else "Add",
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center
-                    )
-                },
-                leadingIcon = {
                     Icon(
                         imageVector = if (selectedTask != null) Icons.Default.Edit else Icons.Default.Add,
-                        contentDescription = null
+                        contentDescription = if (selectedTask != null) "Edit" else "Add",
+                        modifier = Modifier.fillMaxWidth()
                     )
                 },
                 shape = RoundedCornerShape(8.dp)
             )
+
+            // 1b. Delete Button (only when selected)
+            if (selectedTask != null) {
+                FilterChip(
+                    modifier = Modifier.weight(1f),
+                    selected = false,
+                    onClick = { onDeleteClick(selectedTask) },
+                    label = {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete",
+                            modifier = Modifier.fillMaxWidth(),
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    },
+                    shape = RoundedCornerShape(8.dp)
+                )
+            }
 
             // 2. Priority Button
             Box(modifier = Modifier.weight(1f)) {
@@ -88,7 +105,13 @@ fun TaskControlBar(
                     selected = false,
                     onClick = { if (selectedTask != null) showPriorityMenu = true },
                     enabled = selectedTask != null,
-                    label = { Text("Pri", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center) },
+                    label = {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = "Priority",
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    },
                     shape = RoundedCornerShape(8.dp)
                 )
                 if (selectedTask != null) {
@@ -122,7 +145,13 @@ fun TaskControlBar(
                     selected = false,
                     onClick = { if (selectedTask != null) showProjectMenu = true },
                     enabled = selectedTask != null,
-                    label = { Text("Prj", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center) },
+                    label = {
+                        Icon(
+                            imageVector = TodoIcons.Project,
+                            contentDescription = "Project",
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    },
                     shape = RoundedCornerShape(8.dp)
                 )
                 if (selectedTask != null) {
@@ -157,7 +186,13 @@ fun TaskControlBar(
                     selected = false,
                     onClick = { if (selectedTask != null) showContextMenu = true },
                     enabled = selectedTask != null,
-                    label = { Text("Ctx", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center) },
+                    label = {
+                        Icon(
+                            imageVector = TodoIcons.Context,
+                            contentDescription = "Context",
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    },
                     shape = RoundedCornerShape(8.dp)
                 )
                 if (selectedTask != null) {
@@ -173,7 +208,7 @@ fun TaskControlBar(
                                 DropdownMenuItem(
                                     text = { Text("@$ctx") },
                                     leadingIcon = {
-                                        if (hasContext) Icon(androidx.compose.material.icons.Icons.Default.Add, contentDescription = null)
+                                        if (hasContext) Icon(Icons.Default.Add, contentDescription = null)
                                     },
                                     onClick = {
                                         onContextToggle(selectedTask, ctx)

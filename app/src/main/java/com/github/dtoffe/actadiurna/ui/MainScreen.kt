@@ -75,6 +75,9 @@ import com.github.dtoffe.actadiurna.model.StatusFilter
 import com.github.dtoffe.actadiurna.ui.components.EditTaskDialog
 import com.github.dtoffe.actadiurna.ui.components.TaskControlBar
 import com.github.dtoffe.actadiurna.ui.components.TaskItemCard
+import com.github.dtoffe.actadiurna.ui.theme.TodoIcons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Star
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -292,25 +295,25 @@ fun MainScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         val sortOptions = listOf(
-                            SortBy.ALPHABETICAL to "A-Z",
-                            SortBy.PRIORITY to "Pri",
-                            SortBy.PROJECT to "Prj",
-                            SortBy.CONTEXT to "Ctx"
+                            SortBy.ALPHABETICAL to TodoIcons.SortAlpha,
+                            SortBy.PRIORITY to Icons.Default.Star,
+                            SortBy.PROJECT to TodoIcons.Project,
+                            SortBy.CONTEXT to TodoIcons.Context
                         )
 
-                        sortOptions.forEach { (option, label) ->
+                        sortOptions.forEach { (option, icon) ->
                             val isSelected = sortBy == option
                             FilterChip(
                                 modifier = Modifier.weight(1f),
                                 selected = isSelected,
                                 onClick = { viewModel.sortBy.value = option },
                                 label = {
-                                    Text(
-                                        text = label,
-                                        style = MaterialTheme.typography.labelMedium,
-                                        maxLines = 1,
-                                        textAlign = TextAlign.Center,
-                                        modifier = Modifier.fillMaxWidth()
+                                    Icon(
+                                        imageVector = icon,
+                                        contentDescription = option.label,
+                                        modifier = Modifier.size(20.dp),
+                                        tint = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer 
+                                               else MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 },
                                 shape = RoundedCornerShape(8.dp),
@@ -400,6 +403,9 @@ fun MainScreen(
                 },
                 onEditClick = { task ->
                     viewModel.editingTask.value = task
+                },
+                onDeleteClick = { task ->
+                    viewModel.deleteTask(task)
                 },
                 onPriorityChange = { task, pri ->
                     viewModel.updatePriority(task, pri)
