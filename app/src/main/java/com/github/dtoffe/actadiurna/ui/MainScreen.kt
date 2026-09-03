@@ -162,7 +162,7 @@ fun MainScreen(
                             onDismissRequest = { showMenu = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Share tasks") },
+                                text = { Text("Share todo.txt file") },
                                 leadingIcon = { Icon(Icons.Default.Share, contentDescription = null) },
                                 onClick = {
                                     showMenu = false

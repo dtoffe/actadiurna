@@ -3,6 +3,7 @@ package com.github.dtoffe.actadiurna.ui
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
+import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.dtoffe.actadiurna.data.TodoRepository
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.io.File
 
 private data class FilterState(
     val query: String,
@@ -306,13 +308,21 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun createShareIntent(): Intent {
-        val content = repository.rawContent.value
+        val app = getApplication<Application>()
+        val file = File(app.filesDir, "todo.txt")
+        val uri = FileProvider.getUriForFile(
+            app,
+            "${app.packageName}.fileprovider",
+            file
+        )
+        
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, "Acta Diurna Tasks")
-            putExtra(Intent.EXTRA_TEXT, content)
+            putExtra(Intent.EXTRA_SUBJECT, "todo.txt")
+            putExtra(Intent.EXTRA_STREAM, uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        return Intent.createChooser(intent, "Share tasks via")
+        return Intent.createChooser(intent, "Share todo.txt file via")
     }
 
     fun dismissSnackbar() {
