@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -30,11 +32,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.dtoffe.actadiurna.model.TodoItem
+import com.github.dtoffe.actadiurna.ui.theme.TodoIcons
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -122,15 +126,13 @@ fun EditTaskDialog(
                         onClick = { showDatePicker = true },
                         modifier = Modifier.testTag("due_date_picker_button")
                     ) {
-                        Icon(Icons.Default.DateRange, contentDescription = null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text("Due", fontSize = 12.sp)
+                        Icon(Icons.Default.DateRange, contentDescription = "Due Date", modifier = Modifier.size(20.dp))
                     }
 
                     // Priority Button
                     Box {
                         TextButton(onClick = { showPriorityMenu = true }) {
-                            Text("Pri", fontSize = 12.sp)
+                            Icon(Icons.Default.Star, contentDescription = "Priority", modifier = Modifier.size(20.dp))
                         }
                         DropdownMenu(expanded = showPriorityMenu, onDismissRequest = { showPriorityMenu = false }) {
                             listOf('A', 'B', 'C', 'D').forEach { p ->
@@ -161,7 +163,7 @@ fun EditTaskDialog(
                     // Project Button
                     Box {
                         TextButton(onClick = { showProjectMenu = true }) {
-                            Text("Prj", fontSize = 12.sp)
+                            Icon(TodoIcons.Project, contentDescription = "Project", modifier = Modifier.size(20.dp))
                         }
                         DropdownMenu(expanded = showProjectMenu, onDismissRequest = { showProjectMenu = false }) {
                             if (availableProjects.isEmpty()) {
@@ -185,7 +187,7 @@ fun EditTaskDialog(
                     // Context Button
                     Box {
                         TextButton(onClick = { showContextMenu = true }) {
-                            Text("Ctx", fontSize = 12.sp)
+                            Icon(TodoIcons.Context, contentDescription = "Context", modifier = Modifier.size(20.dp))
                         }
                         DropdownMenu(expanded = showContextMenu, onDismissRequest = { showContextMenu = false }) {
                             if (availableContexts.isEmpty()) {
@@ -217,12 +219,12 @@ fun EditTaskDialog(
                 },
                 modifier = Modifier.testTag("edit_task_confirm_button")
             ) {
-                Text("Save")
+                Icon(Icons.Default.Check, contentDescription = "Save", tint = Color(0xFF388E3C))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Icon(Icons.Default.Clear, contentDescription = "Cancel", tint = MaterialTheme.colorScheme.error)
             }
         }
     )
