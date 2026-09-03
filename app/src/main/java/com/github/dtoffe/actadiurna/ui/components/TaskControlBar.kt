@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -73,9 +74,11 @@ fun TaskControlBar(
                 },
                 label = {
                     Icon(
-                        imageVector = if (selectedTask != null) Icons.Default.Edit else Icons.Default.Add,
+                        imageVector = if (selectedTask != null) Icons.Default.Edit else TodoIcons.AddBold,
                         contentDescription = if (selectedTask != null) "Edit" else "Add",
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        tint = if (selectedTask != null) MaterialTheme.colorScheme.onSurfaceVariant 
+                               else Color(0xFF388E3C)
                     )
                 },
                 shape = RoundedCornerShape(8.dp)

@@ -308,13 +308,15 @@ fun MainScreen(
                                 selected = isSelected,
                                 onClick = { viewModel.sortBy.value = option },
                                 label = {
-                                    Icon(
-                                        imageVector = icon,
-                                        contentDescription = option.label,
-                                        modifier = Modifier.size(20.dp),
-                                        tint = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer 
-                                               else MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
+                                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = icon,
+                                            contentDescription = option.label,
+                                            modifier = Modifier.size(20.dp),
+                                            tint = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer 
+                                                   else MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
                                 },
                                 shape = RoundedCornerShape(8.dp),
                                 colors = FilterChipDefaults.filterChipColors(

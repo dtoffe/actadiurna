@@ -14,24 +14,42 @@ object TodoIcons {
         viewportWidth = 24f,
         viewportHeight = 24f
     ).path(fill = SolidColor(Color.Black)) {
-        // 'A'
-        moveTo(3f, 7f)
-        lineTo(5f, 3f)
-        lineTo(7f, 7f)
-        moveTo(4f, 6f)
-        lineTo(6f, 6f)
-        // 'Z'
+        // Bolder 'A'
+        moveTo(3f, 10f)
+        lineTo(6f, 3f)
+        lineTo(9f, 10f)
+        lineTo(7.5f, 10f)
+        lineTo(6.8f, 8.5f)
+        lineTo(5.2f, 8.5f)
+        lineTo(4.5f, 10f)
+        close()
+        moveTo(6f, 5.5f)
+        lineTo(5.6f, 7.2f)
+        lineTo(6.4f, 7.2f)
+        close()
+
+        // Bolder 'Z'
         moveTo(3f, 13f)
-        lineTo(7f, 13f)
-        lineTo(3f, 17f)
-        lineTo(7f, 17f)
-        // Down Arrow
-        moveTo(15f, 5f)
-        lineTo(15f, 19f)
-        moveTo(15f, 19f)
-        lineTo(11f, 15f)
-        moveTo(15f, 19f)
-        lineTo(19f, 15f)
+        lineTo(9f, 13f)
+        lineTo(9f, 14.5f)
+        lineTo(5.5f, 18.5f)
+        lineTo(9f, 18.5f)
+        lineTo(9f, 20f)
+        lineTo(3f, 20f)
+        lineTo(3f, 18.5f)
+        lineTo(6.5f, 14.5f)
+        lineTo(3f, 14.5f)
+        close()
+
+        // Bold Arrow
+        moveTo(14f, 5f)
+        lineTo(16f, 5f)
+        lineTo(16f, 16f)
+        lineTo(20f, 16f)
+        lineTo(15f, 21f)
+        lineTo(10f, 16f)
+        lineTo(14f, 16f)
+        close()
     }.build()
 
     val Project: ImageVector = ImageVector.Builder(
@@ -81,6 +99,28 @@ object TodoIcons {
         curveTo(5f, 5.67f, 5.67f, 5f, 6.5f, 5f)
         curveTo(7.33f, 5f, 8f, 5.67f, 8f, 6.5f)
         curveTo(8f, 7.33f, 7.33f, 8f, 6.5f, 8f)
+        close()
+    }.build()
+
+    val AddBold: ImageVector = ImageVector.Builder(
+        name = "AddBold",
+        defaultWidth = 24.dp,
+        defaultHeight = 24.dp,
+        viewportWidth = 24f,
+        viewportHeight = 24f
+    ).path(fill = SolidColor(Color.Black)) {
+        moveTo(19f, 13.5f)
+        lineTo(13.5f, 13.5f)
+        lineTo(13.5f, 19f)
+        lineTo(10.5f, 19f)
+        lineTo(10.5f, 13.5f)
+        lineTo(5f, 13.5f)
+        lineTo(5f, 10.5f)
+        lineTo(10.5f, 10.5f)
+        lineTo(10.5f, 5f)
+        lineTo(13.5f, 5f)
+        lineTo(13.5f, 10.5f)
+        lineTo(19f, 10.5f)
         close()
     }.build()
 }
