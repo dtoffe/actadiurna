@@ -106,15 +106,22 @@ x 2026-08-17 2026-08-17 Completed setup task @app
         val (completed, active) = allItems.partition { it.isCompleted }
         if (completed.isEmpty()) return@withContext 0
 
-        // Append to done.txt
-        val completedRaw = TodoParser.generateRawContent(completed)
-        if (doneFile.exists()) {
-            doneFile.appendText("\n" + completedRaw)
-        } else {
-            doneFile.writeText(completedRaw)
-        }
+        // Sort new completed tasks by completion date (newest first)
+        val sortedNewCompleted = completed.sortedByDescending { it.completionDate ?: "" }
+        val completedRaw = TodoParser.generateRawContent(sortedNewCompleted)
 
-        // Save remaining active tasks
+        // Read existing done.txt
+        val existingDone = if (doneFile.exists()) doneFile.readText() else ""
+        
+        // Prepend new ones to the top
+        val newDoneContent = if (existingDone.isBlank()) {
+            completedRaw
+        } else {
+            completedRaw + "\n" + existingDone
+        }
+        doneFile.writeText(newDoneContent)
+
+        // Save remaining active tasks to todo.txt
         val activeRaw = TodoParser.generateRawContent(active)
         saveRawContent(activeRaw)
 

@@ -50,6 +50,8 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -101,6 +103,7 @@ fun MainScreen(
     val editingTask by viewModel.editingTask.collectAsState()
     val selectedTask by viewModel.selectedTask.collectAsState()
     val snackbarMessage by viewModel.snackbarMessage.collectAsState()
+    val showArchiveConfirmation by viewModel.showArchiveConfirmation.collectAsState()
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -171,6 +174,14 @@ fun MainScreen(
                                 }
                             )
                             DropdownMenuItem(
+                                text = { Text("Archive completed tasks") },
+                                leadingIcon = { Icon(Icons.Default.Check, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    viewModel.showArchiveConfirmation.value = true
+                                }
+                            )
+                            DropdownMenuItem(
                                 text = { Text("Import tasks file") },
                                 leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
                                 onClick = {
@@ -178,14 +189,6 @@ fun MainScreen(
                                     fileImportLauncher.launch("text/*")
                                 },
                                 modifier = Modifier.testTag("import_file_button")
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Archive completed tasks") },
-                                leadingIcon = { Icon(Icons.Default.Check, contentDescription = null) },
-                                onClick = {
-                                    showMenu = false
-                                    viewModel.archiveCompleted()
-                                }
                             )
                             if (BuildConfig.DEBUG) {
                                 DropdownMenuItem(
@@ -436,6 +439,30 @@ fun MainScreen(
                         viewModel.updateTaskText(task, newRawLine)
                     }
                     viewModel.editingTask.value = null
+                }
+            )
+        }
+
+        // Archive Confirmation Dialog
+        if (showArchiveConfirmation) {
+            AlertDialog(
+                onDismissRequest = { viewModel.showArchiveConfirmation.value = false },
+                title = { Text("Archive Tasks") },
+                text = { Text("Are you sure you want to move all completed tasks to done.txt? This action will clean up your current list.") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            viewModel.showArchiveConfirmation.value = false
+                            viewModel.archiveCompleted()
+                        }
+                    ) {
+                        Text("Archive", color = MaterialTheme.colorScheme.primary)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { viewModel.showArchiveConfirmation.value = false }) {
+                        Text("Cancel")
+                    }
                 }
             )
         }

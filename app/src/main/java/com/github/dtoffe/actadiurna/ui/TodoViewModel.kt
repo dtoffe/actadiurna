@@ -45,6 +45,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     val editingTask = MutableStateFlow<TodoItem?>(null)
     val selectedTask = MutableStateFlow<TodoItem?>(null)
     val snackbarMessage = MutableStateFlow<String?>(null)
+    val showArchiveConfirmation = MutableStateFlow(false)
 
     // Extracted unique contexts from all tasks
     val allContexts: StateFlow<List<String>> = items.combine(selectedContext) { itemList, _ ->
