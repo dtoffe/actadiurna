@@ -23,6 +23,9 @@ class TodoRepository(private val context: Context) {
     private val _items = MutableStateFlow<List<TodoItem>>(emptyList())
     val items: StateFlow<List<TodoItem>> = _items.asStateFlow()
 
+    private val _doneItems = MutableStateFlow<List<TodoItem>>(emptyList())
+    val doneItems: StateFlow<List<TodoItem>> = _doneItems.asStateFlow()
+
     private val initialWelcomeTask: String
         get() = "(A) ${TodoParser.todayDateString()} Welcome to Acta Diurna @context +project"
 
@@ -41,6 +44,17 @@ x 2026-08-17 2026-08-17 Completed setup task @app
         }
         val content = todoFile.readText()
         updateContentState(content)
+        
+        loadDoneData()
+    }
+
+    private fun loadDoneData() {
+        if (doneFile.exists()) {
+            val content = doneFile.readText()
+            _doneItems.value = TodoParser.parseContent(content)
+        } else {
+            _doneItems.value = emptyList()
+        }
     }
 
     suspend fun saveRawContent(newContent: String) = withContext(Dispatchers.IO) {
@@ -120,6 +134,7 @@ x 2026-08-17 2026-08-17 Completed setup task @app
             completedRaw + "\n" + existingDone
         }
         doneFile.writeText(newDoneContent)
+        loadDoneData()
 
         // Save remaining active tasks to todo.txt
         val activeRaw = TodoParser.generateRawContent(active)
@@ -146,5 +161,23 @@ x 2026-08-17 2026-08-17 Completed setup task @app
 
     suspend fun resetToSample() = withContext(Dispatchers.IO) {
         saveRawContent(debugSampleContent)
+    }
+
+    suspend fun unarchiveTasks(itemsToUnarchive: List<TodoItem>) = withContext(Dispatchers.IO) {
+        // 1. Remove from doneItems
+        val currentDone = _doneItems.value.toMutableList()
+        val idsToRemove = itemsToUnarchive.map { it.id }.toSet()
+        currentDone.removeAll { it.id in idsToRemove }
+        
+        val newDoneRaw = TodoParser.generateRawContent(currentDone)
+        doneFile.writeText(newDoneRaw)
+        _doneItems.value = currentDone
+
+        // 2. Add to todoItems
+        val currentTodoRaw = todoFile.readText()
+        val unarchivedRaw = TodoParser.generateRawContent(itemsToUnarchive)
+        
+        val newTodoRaw = if (currentTodoRaw.isBlank()) unarchivedRaw else currentTodoRaw + "\n" + unarchivedRaw
+        saveRawContent(newTodoRaw)
     }
 }

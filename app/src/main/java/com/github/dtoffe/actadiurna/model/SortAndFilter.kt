@@ -13,5 +13,6 @@ enum class SortBy(val label: String) {
     CONTEXT("Context"),
     DUE_DATE("Due Date"),
     CREATION_DATE("Creation Date"),
+    COMPLETION_DATE("Completion Date"),
     LINE_ORDER("File Order")
 }

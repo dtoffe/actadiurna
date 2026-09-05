@@ -29,6 +29,10 @@ private data class FilterState(
     val sort: SortBy,
 )
 
+enum class Screen {
+    MAIN, DONE
+}
+
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = TodoRepository(application)
@@ -46,6 +50,14 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     val selectedTask = MutableStateFlow<TodoItem?>(null)
     val snackbarMessage = MutableStateFlow<String?>(null)
     val showArchiveConfirmation = MutableStateFlow(false)
+
+    val currentScreen = MutableStateFlow(Screen.MAIN)
+
+    // Done Screen State
+    val doneItems: StateFlow<List<TodoItem>> = repository.doneItems
+    val doneSearchQuery = MutableStateFlow("")
+    val doneSortBy = MutableStateFlow(SortBy.COMPLETION_DATE)
+    val selectedDoneTasks = MutableStateFlow<Set<Int>>(emptySet())
 
     // Extracted unique contexts from all tasks
     val allContexts: StateFlow<List<String>> = items.combine(selectedContext) { itemList, _ ->
@@ -146,7 +158,34 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
                 compareByDescending<TodoItem> { it.creationDate ?: "" }
                     .thenBy { it.id }
             )
+            SortBy.COMPLETION_DATE -> list.sortedWith(
+                compareByDescending<TodoItem> { it.completionDate ?: "" }
+                    .thenBy { it.id }
+            )
             SortBy.LINE_ORDER -> list
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val filteredDoneItems: StateFlow<List<TodoItem>> = combine(
+        doneItems,
+        doneSearchQuery,
+        doneSortBy
+    ) { items, query, sort ->
+        var list = items
+
+        if (query.isNotBlank()) {
+            val q = query.lowercase().trim()
+            list = list.filter { it.rawLine.lowercase().contains(q) }
+        }
+
+        val baseComparator = compareByDescending<TodoItem> { it.completionDate ?: "" }
+
+        when (sort) {
+            SortBy.ALPHABETICAL -> list.sortedWith(compareBy<TodoItem> { it.text.lowercase() }.then(baseComparator))
+            SortBy.PRIORITY -> list.sortedWith(compareBy<TodoItem> { it.priority ?: ('Z' + 1) }.then(baseComparator))
+            SortBy.PROJECT -> list.sortedWith(compareBy<TodoItem> { it.projects.firstOrNull() ?: "zzz" }.then(baseComparator))
+            SortBy.CONTEXT -> list.sortedWith(compareBy<TodoItem> { it.contexts.firstOrNull() ?: "zzz" }.then(baseComparator))
+            else -> list.sortedWith(baseComparator) // Default is completion date desc
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
@@ -276,6 +315,22 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             repository.resetToSample()
             snackbarMessage.value = "Reset to sample tasks"
         }
+    }
+
+    fun unarchiveSelectedTasks() {
+        viewModelScope.launch {
+            val toUnarchive = doneItems.value.filter { it.id in selectedDoneTasks.value }
+            if (toUnarchive.isNotEmpty()) {
+                repository.unarchiveTasks(toUnarchive)
+                selectedDoneTasks.value = emptySet()
+                snackbarMessage.value = "Unarchived ${toUnarchive.size} tasks"
+            }
+        }
+    }
+
+    fun toggleDoneTaskSelection(id: Int) {
+        val current = selectedDoneTasks.value
+        selectedDoneTasks.value = if (id in current) current - id else current + id
     }
 
     fun toggleContext(item: TodoItem, contextName: String) {

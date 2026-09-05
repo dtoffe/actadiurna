@@ -86,6 +86,19 @@ import androidx.compose.material.icons.filled.Star
 fun MainScreen(
     viewModel: TodoViewModel,
 ) {
+    val currentScreen by viewModel.currentScreen.collectAsState()
+
+    when (currentScreen) {
+        Screen.MAIN -> TodoListScreen(viewModel)
+        Screen.DONE -> DoneScreen(viewModel, onBack = { viewModel.currentScreen.value = Screen.MAIN })
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TodoListScreen(
+    viewModel: TodoViewModel,
+) {
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -179,6 +192,14 @@ fun MainScreen(
                                 onClick = {
                                     showMenu = false
                                     viewModel.showArchiveConfirmation.value = true
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Open done.txt file") },
+                                leadingIcon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    viewModel.currentScreen.value = Screen.DONE
                                 }
                             )
                             DropdownMenuItem(
