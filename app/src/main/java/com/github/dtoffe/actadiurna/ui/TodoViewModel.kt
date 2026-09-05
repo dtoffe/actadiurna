@@ -50,6 +50,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     val selectedTask = MutableStateFlow<TodoItem?>(null)
     val snackbarMessage = MutableStateFlow<String?>(null)
     val showArchiveConfirmation = MutableStateFlow(false)
+    val showClearArchiveConfirmation = MutableStateFlow(false)
 
     val currentScreen = MutableStateFlow(Screen.MAIN)
 
@@ -317,6 +318,13 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun clearArchive() {
+        viewModelScope.launch {
+            repository.clearArchive()
+            snackbarMessage.value = "Archive cleared"
+        }
+    }
+
     fun unarchiveSelectedTasks() {
         viewModelScope.launch {
             val toUnarchive = doneItems.value.filter { it.id in selectedDoneTasks.value }
@@ -365,7 +373,8 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun createShareIntent(): Intent {
         val app = getApplication<Application>()
-        val file = File(app.filesDir, "todo.txt")
+        val fileName = if (currentScreen.value == Screen.MAIN) "todo.txt" else "done.txt"
+        val file = File(app.filesDir, fileName)
         val uri = FileProvider.getUriForFile(
             app,
             "${app.packageName}.fileprovider",
@@ -374,11 +383,11 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, "todo.txt")
+            putExtra(Intent.EXTRA_SUBJECT, fileName)
             putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        return Intent.createChooser(intent, "Share todo.txt file via")
+        return Intent.createChooser(intent, "Share $fileName file via")
     }
 
     fun dismissSnackbar() {

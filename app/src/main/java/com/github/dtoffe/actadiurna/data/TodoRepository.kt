@@ -163,6 +163,13 @@ x 2026-08-17 2026-08-17 Completed setup task @app
         saveRawContent(debugSampleContent)
     }
 
+    suspend fun clearArchive() = withContext(Dispatchers.IO) {
+        if (doneFile.exists()) {
+            doneFile.writeText("")
+            _doneItems.value = emptyList()
+        }
+    }
+
     suspend fun unarchiveTasks(itemsToUnarchive: List<TodoItem>) = withContext(Dispatchers.IO) {
         // 1. Remove from doneItems
         val currentDone = _doneItems.value.toMutableList()

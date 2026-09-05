@@ -22,9 +22,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -40,11 +46,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -63,18 +71,30 @@ fun DoneScreen(
     val searchQuery by viewModel.doneSearchQuery.collectAsState()
     val sortBy by viewModel.doneSortBy.collectAsState()
     val selectedIds by viewModel.selectedDoneTasks.collectAsState()
+    val showClearConfirmation by viewModel.showClearArchiveConfirmation.collectAsState()
+
+    val context = LocalContext.current
+    var showMenu by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = "Archived Tasks (done.txt)",
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.Monospace
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "Acta Diurna",
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace
+                            )
                         )
-                    )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "(Archive)",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                        )
+                    }
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
@@ -82,9 +102,33 @@ fun DoneScreen(
                     }
                 },
                 actions = {
-                    if (selectedIds.isNotEmpty()) {
-                        IconButton(onClick = { viewModel.unarchiveSelectedTasks() }) {
-                            Icon(Icons.Default.Refresh, contentDescription = "Unarchive selected", tint = Color(0xFF388E3C))
+                    // Options Menu
+                    Box {
+                        IconButton(onClick = { showMenu = true }) {
+                            Icon(Icons.Default.MoreVert, contentDescription = "Archive options")
+                        }
+
+                        DropdownMenu(
+                            expanded = showMenu,
+                            onDismissRequest = { showMenu = false }
+                        ) {
+                            DropdownMenuItem(
+                                text = { Text("Share done.txt file") },
+                                leadingIcon = { Icon(Icons.Default.Share, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    val shareIntent = viewModel.createShareIntent()
+                                    context.startActivity(shareIntent)
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Clear archive") },
+                                leadingIcon = { Icon(Icons.Default.Clear, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    viewModel.showClearArchiveConfirmation.value = true
+                                }
+                            )
                         }
                     }
                 },
@@ -103,7 +147,7 @@ fun DoneScreen(
                 .padding(innerPadding)
                 .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
         ) {
-            // 1. Search Bar (Same slim style)
+            // 1. Search Bar
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 color = Color.Transparent
@@ -175,7 +219,7 @@ fun DoneScreen(
                         )
                     }
 
-                    // 2. Sort Buttons Area (Centered)
+                    // 2. Sort Buttons Area
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -184,7 +228,7 @@ fun DoneScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         val sortOptions = listOf(
-                            SortBy.COMPLETION_DATE to Icons.Default.Refresh, // Changed to Refresh since History is missing
+                            SortBy.COMPLETION_DATE to Icons.Default.DateRange,
                             SortBy.ALPHABETICAL to TodoIcons.SortAlpha,
                             SortBy.PRIORITY to Icons.Default.Star,
                             SortBy.PROJECT to TodoIcons.Project,
@@ -256,10 +300,10 @@ fun DoneScreen(
                         items(items, key = { it.id }) { item ->
                             TaskItemCard(
                                 item = item,
-                                onToggleCompletion = { /* Not allowed here */ },
-                                onUpdatePriority = { /* Not allowed here */ },
-                                onEdit = { /* Not allowed here */ },
-                                onDelete = { /* Not allowed here */ },
+                                onToggleCompletion = { },
+                                onUpdatePriority = { },
+                                onEdit = { },
+                                onDelete = { },
                                 sortBy = sortBy,
                                 isSelected = item.id in selectedIds,
                                 onSelect = {
@@ -291,6 +335,29 @@ fun DoneScreen(
                     }
                 }
             }
+        }
+
+        if (showClearConfirmation) {
+            AlertDialog(
+                onDismissRequest = { viewModel.showClearArchiveConfirmation.value = false },
+                title = { Text("Clear Archive") },
+                text = { Text("Are you sure you want to permanently delete all archived tasks in done.txt? This action cannot be undone.") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            viewModel.showClearArchiveConfirmation.value = false
+                            viewModel.clearArchive()
+                        }
+                    ) {
+                        Text("Clear All", color = MaterialTheme.colorScheme.error)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { viewModel.showClearArchiveConfirmation.value = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
         }
     }
 }
