@@ -29,15 +29,6 @@ class TodoRepository(private val context: Context) {
     private val initialWelcomeTask: String
         get() = "(A) ${TodoParser.todayDateString()} Welcome to Acta Diurna @context +project"
 
-    private val debugSampleContent = """
-(A) 2026-08-08 Welcome to todo.txt! @app +tutorial due:2026-08-17
-(A) 2026-08-17 Review important project tasks +work @office
-(B) 2026-08-15 Buy coffee beans @groceries +home
-(C) 2026-08-14 Call plumber for kitchen sink @phone +home
-x 2026-08-17 2026-08-17 Completed setup task @app
-2026-08-16 Organize workspace desk @home
-    """.trimIndent()
-
     suspend fun loadInitialData() = withContext(Dispatchers.IO) {
         if (!todoFile.exists()) {
             todoFile.writeText(initialWelcomeTask)
@@ -174,10 +165,6 @@ x 2026-08-17 2026-08-17 Completed setup task @app
             e.printStackTrace()
             false
         }
-    }
-
-    suspend fun resetToSample() = withContext(Dispatchers.IO) {
-        saveRawContent(debugSampleContent)
     }
 
     suspend fun clearArchive() = withContext(Dispatchers.IO) {

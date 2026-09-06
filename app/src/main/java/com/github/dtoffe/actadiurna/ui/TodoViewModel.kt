@@ -322,13 +322,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun resetToSample() {
-        viewModelScope.launch {
-            repository.resetToSample()
-            snackbarMessage.value = "Reset to sample tasks"
-        }
-    }
-
     fun clearArchive() {
         viewModelScope.launch {
             repository.clearArchive()

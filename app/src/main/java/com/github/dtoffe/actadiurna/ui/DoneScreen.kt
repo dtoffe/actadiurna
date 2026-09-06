@@ -34,6 +34,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -75,6 +76,7 @@ fun DoneScreen(
     val sortBy by viewModel.doneSortBy.collectAsState()
     val selectedIds by viewModel.selectedDoneTasks.collectAsState()
     val showClearConfirmation by viewModel.showClearArchiveConfirmation.collectAsState()
+    var showImportConfirmation by remember { mutableStateOf(false) }
 
     val fileImportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -131,12 +133,16 @@ fun DoneScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Import tasks file") },
+                                text = { Text("Import done.txt file") },
                                 leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
-                                    fileImportLauncher.launch("text/*")
-                                }
+                                    showImportConfirmation = true
+                                },
+                                colors = MenuDefaults.itemColors(
+                                    textColor = MaterialTheme.colorScheme.error,
+                                    leadingIconColor = MaterialTheme.colorScheme.error
+                                )
                             )
                             DropdownMenuItem(
                                 text = { Text("Clear all tasks") },
@@ -144,7 +150,11 @@ fun DoneScreen(
                                 onClick = {
                                     showMenu = false
                                     viewModel.showClearArchiveConfirmation.value = true
-                                }
+                                },
+                                colors = MenuDefaults.itemColors(
+                                    textColor = MaterialTheme.colorScheme.error,
+                                    leadingIconColor = MaterialTheme.colorScheme.error
+                                )
                             )
                         }
                     }
@@ -358,7 +368,7 @@ fun DoneScreen(
             AlertDialog(
                 onDismissRequest = { viewModel.showClearArchiveConfirmation.value = false },
                 title = { Text("Clear Archive") },
-                text = { Text("Are you sure you want to permanently delete all archived tasks in done.txt? This action cannot be undone.") },
+                text = { Text("Are you sure you want to permanently delete all archived tasks in done.txt? This action cannot be undone and will wipe your current data.") },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -371,6 +381,29 @@ fun DoneScreen(
                 },
                 dismissButton = {
                     TextButton(onClick = { viewModel.showClearArchiveConfirmation.value = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
+        }
+
+        if (showImportConfirmation) {
+            AlertDialog(
+                onDismissRequest = { showImportConfirmation = false },
+                title = { Text("Import done.txt") },
+                text = { Text("Importing a new file will permanently wipe all your current archived tasks in done.txt and replace them with the content of the imported file. This action cannot be undone.") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showImportConfirmation = false
+                            fileImportLauncher.launch("text/*")
+                        }
+                    ) {
+                        Text("Import", color = MaterialTheme.colorScheme.error)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showImportConfirmation = false }) {
                         Text("Cancel")
                     }
                 }

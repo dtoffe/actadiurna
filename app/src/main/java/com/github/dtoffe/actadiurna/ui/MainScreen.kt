@@ -33,11 +33,11 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -71,7 +71,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.github.dtoffe.actadiurna.BuildConfig
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.StatusFilter
 import com.github.dtoffe.actadiurna.ui.components.EditTaskDialog
@@ -118,6 +117,7 @@ fun TodoListScreen(
     val snackbarMessage by viewModel.snackbarMessage.collectAsState()
     val showArchiveConfirmation by viewModel.showArchiveConfirmation.collectAsState()
     var showClearTasksConfirmation by remember { mutableStateOf(false) }
+    var showImportConfirmation by remember { mutableStateOf(false) }
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -204,13 +204,17 @@ fun TodoListScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Import tasks file") },
+                                text = { Text("Import todo.txt file") },
                                 leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
-                                    fileImportLauncher.launch("text/*")
+                                    showImportConfirmation = true
                                 },
-                                modifier = Modifier.testTag("import_file_button")
+                                modifier = Modifier.testTag("import_file_button"),
+                                colors = MenuDefaults.itemColors(
+                                    textColor = MaterialTheme.colorScheme.error,
+                                    leadingIconColor = MaterialTheme.colorScheme.error
+                                )
                             )
                             DropdownMenuItem(
                                 text = { Text("Clear all tasks") },
@@ -218,18 +222,12 @@ fun TodoListScreen(
                                 onClick = {
                                     showMenu = false
                                     showClearTasksConfirmation = true
-                                }
-                            )
-                            if (BuildConfig.DEBUG) {
-                                DropdownMenuItem(
-                                    text = { Text("Reset to sample file") },
-                                    leadingIcon = { Icon(Icons.Default.Refresh, contentDescription = null) },
-                                    onClick = {
-                                        showMenu = false
-                                        viewModel.resetToSample()
-                                    }
+                                },
+                                colors = MenuDefaults.itemColors(
+                                    textColor = MaterialTheme.colorScheme.error,
+                                    leadingIconColor = MaterialTheme.colorScheme.error
                                 )
-                            }
+                            )
                         }
                     }
                 },
@@ -502,7 +500,7 @@ fun TodoListScreen(
             AlertDialog(
                 onDismissRequest = { showClearTasksConfirmation = false },
                 title = { Text("Clear All Tasks") },
-                text = { Text("Are you sure you want to permanently delete all tasks in todo.txt? This action cannot be undone.") },
+                text = { Text("Are you sure you want to permanently delete all tasks in todo.txt? This action cannot be undone and will wipe your current data.") },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -515,6 +513,30 @@ fun TodoListScreen(
                 },
                 dismissButton = {
                     TextButton(onClick = { showClearTasksConfirmation = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
+        }
+
+        // Import Confirmation Dialog
+        if (showImportConfirmation) {
+            AlertDialog(
+                onDismissRequest = { showImportConfirmation = false },
+                title = { Text("Import todo.txt") },
+                text = { Text("Importing a new file will permanently wipe all your current tasks in todo.txt and replace them with the content of the imported file. This action cannot be undone.") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showImportConfirmation = false
+                            fileImportLauncher.launch("text/*")
+                        }
+                    ) {
+                        Text("Import", color = MaterialTheme.colorScheme.error)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showImportConfirmation = false }) {
                         Text("Cancel")
                     }
                 }
