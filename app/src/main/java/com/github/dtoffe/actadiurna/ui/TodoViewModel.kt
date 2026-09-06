@@ -311,6 +311,17 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun importDoneFromUri(uri: Uri) {
+        viewModelScope.launch {
+            val success = repository.importDoneFromUri(uri)
+            if (success) {
+                snackbarMessage.value = "Successfully imported archived tasks"
+            } else {
+                snackbarMessage.value = "Failed to import file"
+            }
+        }
+    }
+
     fun resetToSample() {
         viewModelScope.launch {
             repository.resetToSample()
@@ -322,6 +333,13 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             repository.clearArchive()
             snackbarMessage.value = "Archive cleared"
+        }
+    }
+
+    fun clearAllTasks() {
+        viewModelScope.launch {
+            repository.saveRawContent("")
+            snackbarMessage.value = "All tasks cleared"
         }
     }
 

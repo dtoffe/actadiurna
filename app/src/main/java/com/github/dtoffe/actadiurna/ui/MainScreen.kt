@@ -117,6 +117,7 @@ fun TodoListScreen(
     val selectedTask by viewModel.selectedTask.collectAsState()
     val snackbarMessage by viewModel.snackbarMessage.collectAsState()
     val showArchiveConfirmation by viewModel.showArchiveConfirmation.collectAsState()
+    var showClearTasksConfirmation by remember { mutableStateOf(false) }
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -210,6 +211,14 @@ fun TodoListScreen(
                                     fileImportLauncher.launch("text/*")
                                 },
                                 modifier = Modifier.testTag("import_file_button")
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Clear all tasks") },
+                                leadingIcon = { Icon(Icons.Default.Clear, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    showClearTasksConfirmation = true
+                                }
                             )
                             if (BuildConfig.DEBUG) {
                                 DropdownMenuItem(
@@ -482,6 +491,30 @@ fun TodoListScreen(
                 },
                 dismissButton = {
                     TextButton(onClick = { viewModel.showArchiveConfirmation.value = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
+        }
+
+        // Clear All Tasks Confirmation Dialog
+        if (showClearTasksConfirmation) {
+            AlertDialog(
+                onDismissRequest = { showClearTasksConfirmation = false },
+                title = { Text("Clear All Tasks") },
+                text = { Text("Are you sure you want to permanently delete all tasks in todo.txt? This action cannot be undone.") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showClearTasksConfirmation = false
+                            viewModel.clearAllTasks()
+                        }
+                    ) {
+                        Text("Clear All", color = MaterialTheme.colorScheme.error)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showClearTasksConfirmation = false }) {
                         Text("Cancel")
                     }
                 }

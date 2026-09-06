@@ -1,5 +1,7 @@
 package com.github.dtoffe.actadiurna.ui
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +23,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.MoreVert
@@ -73,6 +76,12 @@ fun DoneScreen(
     val selectedIds by viewModel.selectedDoneTasks.collectAsState()
     val showClearConfirmation by viewModel.showClearArchiveConfirmation.collectAsState()
 
+    val fileImportLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let { viewModel.importDoneFromUri(it) }
+    }
+
     val context = LocalContext.current
     var showMenu by remember { mutableStateOf(false) }
 
@@ -122,7 +131,15 @@ fun DoneScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Clear archive") },
+                                text = { Text("Import tasks file") },
+                                leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    fileImportLauncher.launch("text/*")
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Clear all tasks") },
                                 leadingIcon = { Icon(Icons.Default.Clear, contentDescription = null) },
                                 onClick = {
                                     showMenu = false

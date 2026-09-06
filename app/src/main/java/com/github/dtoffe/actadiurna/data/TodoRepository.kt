@@ -159,6 +159,23 @@ x 2026-08-17 2026-08-17 Completed setup task @app
         }
     }
 
+    suspend fun importDoneFromUri(uri: Uri): Boolean = withContext(Dispatchers.IO) {
+        try {
+            context.contentResolver.openInputStream(uri)?.use { inputStream ->
+                InputStreamReader(inputStream).use { reader ->
+                    val content = reader.readText()
+                    doneFile.writeText(content)
+                    loadDoneData()
+                    return@withContext true
+                }
+            }
+            false
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
     suspend fun resetToSample() = withContext(Dispatchers.IO) {
         saveRawContent(debugSampleContent)
     }
