@@ -63,8 +63,16 @@
     <string name="reset_to_sample_tasks">Сбросить к примеру</string>
     <string name="welcome_task_text">Добро пожаловать в Acta Diurna @контекст +проект</string>
     <string name="settings_title">Настройки</string>
+    <string name="language_selection_title">Язык</string>
+    <string name="system_default">По умолчанию</string>
     <string name="help_title">Справка</string>
     <string name="about_title">О приложении</string>
+    <string name="version_format">Версия %1$s</string>
+    <string name="copyright_notice">Copyright © 2026 Alejandro Daniel Toffetti</string>
+    <string name="license_mit">Лицензия MIT</string>
+    <string name="github_repository">Репозиторий на GitHub</string>
+    <string name="todotxt_format">Формат файла todo.txt</string>
+    <string name="thanks_gina">Особая благодарность Джине Трапани за создание формата todo.txt.</string>
 
     <!-- Components -->
     <string name="date_picker_ok">ОК</string>

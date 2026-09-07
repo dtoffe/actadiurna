@@ -63,8 +63,16 @@
     <string name="reset_to_sample_tasks">Auf Beispielaufgaben zurücksetzen</string>
     <string name="welcome_task_text">Willkommen bei Acta Diurna @Kontext +Projekt</string>
     <string name="settings_title">Einstellungen</string>
+    <string name="language_selection_title">Sprache</string>
+    <string name="system_default">Systemstandard</string>
     <string name="help_title">Hilfe</string>
     <string name="about_title">Über</string>
+    <string name="version_format">Version %1$s</string>
+    <string name="copyright_notice">Copyright © 2026 Alejandro Daniel Toffetti</string>
+    <string name="license_mit">MIT-Lizenz</string>
+    <string name="github_repository">GitHub-Repository</string>
+    <string name="todotxt_format">todo.txt-Dateiformat</string>
+    <string name="thanks_gina">Besonderer Dank an Gina Trapani für die Erstellung des todo.txt-Formats.</string>
 
     <!-- Components -->
     <string name="date_picker_ok">OK</string>

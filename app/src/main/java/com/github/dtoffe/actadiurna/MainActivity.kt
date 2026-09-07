@@ -1,7 +1,7 @@
 package com.github.dtoffe.actadiurna
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -9,7 +9,7 @@ import com.github.dtoffe.actadiurna.ui.MainScreen
 import com.github.dtoffe.actadiurna.ui.TodoViewModel
 import com.github.dtoffe.actadiurna.ui.theme.ActaDiurnaTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     private val viewModel: TodoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
