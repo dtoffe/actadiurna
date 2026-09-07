@@ -62,6 +62,7 @@
     <string name="share_chooser_title">%1$s-Datei teilen über</string>
     <string name="reset_to_sample_tasks">Auf Beispielaufgaben zurücksetzen</string>
     <string name="welcome_task_text">Willkommen bei Acta Diurna @Kontext +Projekt</string>
+    <string name="settings_title">Einstellungen</string>
 
     <!-- Components -->
     <string name="date_picker_ok">OK</string>

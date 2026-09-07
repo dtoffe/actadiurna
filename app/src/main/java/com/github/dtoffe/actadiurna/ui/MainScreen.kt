@@ -33,9 +33,11 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -204,6 +206,7 @@ fun TodoListScreen(
                                     viewModel.currentScreen.value = Screen.DONE
                                 }
                             )
+                            HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
                             DropdownMenuItem(
                                 text = { Text(stringResource(R.string.import_todo_file)) },
                                 leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
@@ -228,6 +231,15 @@ fun TodoListScreen(
                                     textColor = MaterialTheme.colorScheme.error,
                                     leadingIconColor = MaterialTheme.colorScheme.error
                                 )
+                            )
+                            HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
+                            DropdownMenuItem(
+                                text = { Text(stringResource(R.string.settings_title)) },
+                                leadingIcon = { Icon(Icons.Default.Settings, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    // Action not implemented yet
+                                }
                             )
                         }
                     }

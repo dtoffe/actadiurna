@@ -62,6 +62,7 @@
     <string name="share_chooser_title">Partager le fichier %1$s via</string>
     <string name="reset_to_sample_tasks">Réinitialiser aux tâches d\'exemple</string>
     <string name="welcome_task_text">Bienvenue sur Acta Diurna @contexte +projet</string>
+    <string name="settings_title">Paramètres</string>
 
     <!-- Components -->
     <string name="date_picker_ok">OK</string>

@@ -29,11 +29,13 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -134,6 +136,7 @@ fun DoneScreen(
                                     context.startActivity(shareIntent)
                                 }
                             )
+                            HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
                             DropdownMenuItem(
                                 text = { Text(stringResource(R.string.import_done_file)) },
                                 leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
@@ -157,6 +160,15 @@ fun DoneScreen(
                                     textColor = MaterialTheme.colorScheme.error,
                                     leadingIconColor = MaterialTheme.colorScheme.error
                                 )
+                            )
+                            HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
+                            DropdownMenuItem(
+                                text = { Text(stringResource(R.string.settings_title)) },
+                                leadingIcon = { Icon(Icons.Default.Settings, contentDescription = null) },
+                                onClick = {
+                                    showMenu = false
+                                    // Action not implemented yet
+                                }
                             )
                         }
                     }
