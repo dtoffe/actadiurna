@@ -15,12 +15,12 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.model.TodoItem
 import com.github.dtoffe.actadiurna.ui.theme.TodoIcons
 
@@ -75,7 +76,7 @@ fun TaskControlBar(
                 label = {
                     Icon(
                         imageVector = if (selectedTask != null) Icons.Default.Edit else TodoIcons.AddBold,
-                        contentDescription = if (selectedTask != null) "Edit" else "Add",
+                        contentDescription = stringResource(if (selectedTask != null) R.string.edit_content_desc else R.string.add_content_desc),
                         modifier = Modifier.fillMaxWidth(),
                         tint = if (selectedTask != null) MaterialTheme.colorScheme.onSurfaceVariant 
                                else Color(0xFF388E3C)
@@ -93,7 +94,7 @@ fun TaskControlBar(
                     label = {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete",
+                            contentDescription = stringResource(R.string.delete_content_desc),
                             modifier = Modifier.fillMaxWidth(),
                             tint = MaterialTheme.colorScheme.error
                         )
@@ -111,7 +112,7 @@ fun TaskControlBar(
                     label = {
                         Icon(
                             imageVector = Icons.Default.Star,
-                            contentDescription = "Priority",
+                            contentDescription = stringResource(R.string.priority_content_desc),
                             modifier = Modifier.fillMaxWidth()
                         )
                     },
@@ -124,7 +125,7 @@ fun TaskControlBar(
                     ) {
                         listOf('A', 'B', 'C', 'D').forEach { p ->
                             DropdownMenuItem(
-                                text = { Text("Priority ($p)") },
+                                text = { Text(stringResource(R.string.priority_label, p)) },
                                 onClick = {
                                     onPriorityChange(selectedTask, p)
                                     showPriorityMenu = false
@@ -132,7 +133,7 @@ fun TaskControlBar(
                             )
                         }
                         DropdownMenuItem(
-                            text = { Text("Remove Priority") },
+                            text = { Text(stringResource(R.string.remove_priority_menu)) },
                             onClick = {
                                 onPriorityChange(selectedTask, null)
                                 showPriorityMenu = false
@@ -151,7 +152,7 @@ fun TaskControlBar(
                     label = {
                         Icon(
                             imageVector = TodoIcons.Project,
-                            contentDescription = "Project",
+                            contentDescription = stringResource(R.string.project_content_desc),
                             modifier = Modifier.fillMaxWidth()
                         )
                     },
@@ -163,7 +164,7 @@ fun TaskControlBar(
                         onDismissRequest = { showProjectMenu = false }
                     ) {
                         if (availableProjects.isEmpty()) {
-                            DropdownMenuItem(text = { Text("No projects defined") }, onClick = {}, enabled = false)
+                            DropdownMenuItem(text = { Text(stringResource(R.string.no_projects_defined)) }, onClick = {}, enabled = false)
                         } else {
                             availableProjects.forEach { prj ->
                                 val hasProject = selectedTask.projects.contains(prj)
@@ -192,7 +193,7 @@ fun TaskControlBar(
                     label = {
                         Icon(
                             imageVector = TodoIcons.Context,
-                            contentDescription = "Context",
+                            contentDescription = stringResource(R.string.context_content_desc),
                             modifier = Modifier.fillMaxWidth()
                         )
                     },
@@ -204,7 +205,7 @@ fun TaskControlBar(
                         onDismissRequest = { showContextMenu = false }
                     ) {
                         if (availableContexts.isEmpty()) {
-                            DropdownMenuItem(text = { Text("No contexts defined") }, onClick = {}, enabled = false)
+                            DropdownMenuItem(text = { Text(stringResource(R.string.no_contexts_defined)) }, onClick = {}, enabled = false)
                         } else {
                             availableContexts.forEach { ctx ->
                                 val hasContext = selectedTask.contexts.contains(ctx)

@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.data.TodoRepository
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.StatusFilter
@@ -223,21 +224,27 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
                 if (repository.rawContent.value.isBlank()) finalLine 
                 else "${repository.rawContent.value}\n$finalLine"
             )
-            snackbarMessage.value = "Task added"
+            snackbarMessage.value = getApplication<Application>().getString(R.string.task_added)
         }
     }
 
     fun toggleCompletion(item: TodoItem) {
         viewModelScope.launch {
             repository.toggleTaskCompletion(item)
-            snackbarMessage.value = if (!item.isCompleted) "Task completed" else "Task uncompleted"
+            snackbarMessage.value = getApplication<Application>().getString(
+                if (!item.isCompleted) R.string.task_completed else R.string.task_uncompleted
+            )
         }
     }
 
     fun updatePriority(item: TodoItem, newPriority: Char?) {
         viewModelScope.launch {
             repository.updateTaskPriority(item, newPriority)
-            snackbarMessage.value = if (newPriority != null) "Priority set to ($newPriority)" else "Priority cleared"
+            snackbarMessage.value = if (newPriority != null) {
+                getApplication<Application>().getString(R.string.priority_set, newPriority)
+            } else {
+                getApplication<Application>().getString(R.string.priority_cleared)
+            }
         }
     }
 
@@ -272,7 +279,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
                 // Refresh selection with updated item
                 selectedTask.value = repository.items.value.find { it.id == item.id }
             }
-            snackbarMessage.value = "Task updated"
+            snackbarMessage.value = getApplication<Application>().getString(R.string.task_updated)
         }
     }
 
@@ -282,21 +289,18 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             if (selectedTask.value?.id == item.id) {
                 selectedTask.value = null
             }
-            snackbarMessage.value = "Task deleted"
-        }
-    }
-
-    fun saveRawContent(newContent: String) {
-        viewModelScope.launch {
-            repository.saveRawContent(newContent)
-            snackbarMessage.value = "Tasks saved"
+            snackbarMessage.value = getApplication<Application>().getString(R.string.task_deleted)
         }
     }
 
     fun archiveCompleted() {
         viewModelScope.launch {
             val count = repository.archiveCompletedTasks()
-            snackbarMessage.value = if (count > 0) "Archived $count completed tasks to done.txt" else "No completed tasks to archive"
+            snackbarMessage.value = if (count > 0) {
+                getApplication<Application>().getString(R.string.archived_tasks_count, count)
+            } else {
+                getApplication<Application>().getString(R.string.no_tasks_to_archive)
+            }
         }
     }
 
@@ -304,9 +308,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val success = repository.importFromUri(uri)
             if (success) {
-                snackbarMessage.value = "Successfully imported tasks"
+                snackbarMessage.value = getApplication<Application>().getString(R.string.import_success)
             } else {
-                snackbarMessage.value = "Failed to import file"
+                snackbarMessage.value = getApplication<Application>().getString(R.string.import_failed)
             }
         }
     }
@@ -315,9 +319,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val success = repository.importDoneFromUri(uri)
             if (success) {
-                snackbarMessage.value = "Successfully imported archived tasks"
+                snackbarMessage.value = getApplication<Application>().getString(R.string.import_done_success)
             } else {
-                snackbarMessage.value = "Failed to import file"
+                snackbarMessage.value = getApplication<Application>().getString(R.string.import_failed)
             }
         }
     }
@@ -325,14 +329,14 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     fun clearArchive() {
         viewModelScope.launch {
             repository.clearArchive()
-            snackbarMessage.value = "Archive cleared"
+            snackbarMessage.value = getApplication<Application>().getString(R.string.archive_cleared)
         }
     }
 
     fun clearAllTasks() {
         viewModelScope.launch {
             repository.saveRawContent("")
-            snackbarMessage.value = "All tasks cleared"
+            snackbarMessage.value = getApplication<Application>().getString(R.string.all_tasks_cleared)
         }
     }
 
@@ -342,7 +346,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             if (toUnarchive.isNotEmpty()) {
                 repository.unarchiveTasks(toUnarchive)
                 selectedDoneTasks.value = emptySet()
-                snackbarMessage.value = "Unarchived ${toUnarchive.size} tasks"
+                snackbarMessage.value = getApplication<Application>().getString(R.string.unarchived_tasks_count, toUnarchive.size)
             }
         }
     }
@@ -398,7 +402,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        return Intent.createChooser(intent, "Share $fileName file via")
+        return Intent.createChooser(intent, getApplication<Application>().getString(R.string.share_chooser_title, fileName))
     }
 
     fun dismissSnackbar() {

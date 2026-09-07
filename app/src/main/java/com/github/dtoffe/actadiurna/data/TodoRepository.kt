@@ -2,6 +2,7 @@ package com.github.dtoffe.actadiurna.data
 
 import android.content.Context
 import android.net.Uri
+import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.model.TodoItem
 import com.github.dtoffe.actadiurna.model.TodoParser
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,7 @@ class TodoRepository(private val context: Context) {
     val doneItems: StateFlow<List<TodoItem>> = _doneItems.asStateFlow()
 
     private val initialWelcomeTask: String
-        get() = "(A) ${TodoParser.todayDateString()} Welcome to Acta Diurna @context +project"
+        get() = "(A) ${TodoParser.todayDateString()} ${context.getString(R.string.welcome_task_text)}"
 
     suspend fun loadInitialData() = withContext(Dispatchers.IO) {
         if (!todoFile.exists()) {

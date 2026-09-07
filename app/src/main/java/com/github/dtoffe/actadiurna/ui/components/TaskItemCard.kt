@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
@@ -25,6 +24,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,6 +42,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.TodoItem
 import com.github.dtoffe.actadiurna.model.TodoParser
@@ -153,7 +154,7 @@ fun TaskItemCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Task options",
+                        contentDescription = stringResource(R.string.task_options),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                         modifier = Modifier.size(16.dp)
                     )
@@ -164,21 +165,21 @@ fun TaskItemCard(
                     onDismissRequest = { showOptionsMenu = false }
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Edit Task") },
+                        text = { Text(stringResource(R.string.edit_task_menu)) },
                         onClick = {
                             showOptionsMenu = false
                             onEdit()
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Set Priority...") },
+                        text = { Text(stringResource(R.string.set_priority_menu)) },
                         onClick = {
                             showOptionsMenu = false
                             showPriorityMenu = true
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Delete", color = MaterialTheme.colorScheme.error) },
+                        text = { Text(stringResource(R.string.delete_menu), color = MaterialTheme.colorScheme.error) },
                         onClick = {
                             showOptionsMenu = false
                             onDelete()
@@ -192,7 +193,7 @@ fun TaskItemCard(
                 ) {
                     listOf('A', 'B', 'C', 'D').forEach { p ->
                         DropdownMenuItem(
-                            text = { Text("Priority ($p)") },
+                            text = { Text(stringResource(R.string.priority_label, p)) },
                             onClick = {
                                 onUpdatePriority(p)
                                 showPriorityMenu = false
@@ -200,7 +201,7 @@ fun TaskItemCard(
                         )
                     }
                     DropdownMenuItem(
-                        text = { Text("Remove priority") },
+                        text = { Text(stringResource(R.string.remove_priority_menu)) },
                         onClick = {
                             onUpdatePriority(null)
                             showPriorityMenu = false

@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,7 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.model.TodoItem
 import com.github.dtoffe.actadiurna.ui.theme.TodoIcons
 import java.text.SimpleDateFormat
@@ -80,12 +81,12 @@ fun EditTaskDialog(
                     }
                     showDatePicker = false
                 }) {
-                    Text("OK")
+                    Text(stringResource(R.string.date_picker_ok))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDatePicker = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel_button))
                 }
             }
         ) {
@@ -95,11 +96,11 @@ fun EditTaskDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (item.id == -1) "Add Task" else "Edit Task") },
+        title = { Text(stringResource(if (item.id == -1) R.string.add_task_title else R.string.edit_task_title)) },
         text = {
             Column {
                 Text(
-                    "Format: (A) yyyy-mm-dd Task @ctx +prj due:yyyy-mm-dd",
+                    stringResource(R.string.format_instruction),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                     fontFamily = FontFamily.Monospace
@@ -126,13 +127,13 @@ fun EditTaskDialog(
                         onClick = { showDatePicker = true },
                         modifier = Modifier.testTag("due_date_picker_button")
                     ) {
-                        Icon(Icons.Default.DateRange, contentDescription = "Due Date", modifier = Modifier.size(20.dp))
+                        Icon(Icons.Default.DateRange, contentDescription = stringResource(R.string.due_date_content_desc), modifier = Modifier.size(20.dp))
                     }
 
                     // Priority Button
                     Box {
                         TextButton(onClick = { showPriorityMenu = true }) {
-                            Icon(Icons.Default.Star, contentDescription = "Priority", modifier = Modifier.size(20.dp))
+                            Icon(Icons.Default.Star, contentDescription = stringResource(R.string.priority_content_desc), modifier = Modifier.size(20.dp))
                         }
                         DropdownMenu(expanded = showPriorityMenu, onDismissRequest = { showPriorityMenu = false }) {
                             listOf('A', 'B', 'C', 'D').forEach { p ->
@@ -151,7 +152,7 @@ fun EditTaskDialog(
                                 )
                             }
                             DropdownMenuItem(
-                                text = { Text("None") },
+                                text = { Text(stringResource(R.string.priority_none)) },
                                 onClick = {
                                     rawTextState = rawTextState.replaceFirst(Regex("""^\([A-Z]\)\s+"""), "")
                                     showPriorityMenu = false
@@ -163,11 +164,11 @@ fun EditTaskDialog(
                     // Project Button
                     Box {
                         TextButton(onClick = { showProjectMenu = true }) {
-                            Icon(TodoIcons.Project, contentDescription = "Project", modifier = Modifier.size(20.dp))
+                            Icon(TodoIcons.Project, contentDescription = stringResource(R.string.project_content_desc), modifier = Modifier.size(20.dp))
                         }
                         DropdownMenu(expanded = showProjectMenu, onDismissRequest = { showProjectMenu = false }) {
                             if (availableProjects.isEmpty()) {
-                                DropdownMenuItem(text = { Text("No projects") }, onClick = {}, enabled = false)
+                                DropdownMenuItem(text = { Text(stringResource(R.string.no_projects)) }, onClick = {}, enabled = false)
                             } else {
                                 availableProjects.forEach { prj ->
                                     DropdownMenuItem(
@@ -187,11 +188,11 @@ fun EditTaskDialog(
                     // Context Button
                     Box {
                         TextButton(onClick = { showContextMenu = true }) {
-                            Icon(TodoIcons.Context, contentDescription = "Context", modifier = Modifier.size(20.dp))
+                            Icon(TodoIcons.Context, contentDescription = stringResource(R.string.context_content_desc), modifier = Modifier.size(20.dp))
                         }
                         DropdownMenu(expanded = showContextMenu, onDismissRequest = { showContextMenu = false }) {
                             if (availableContexts.isEmpty()) {
-                                DropdownMenuItem(text = { Text("No contexts") }, onClick = {}, enabled = false)
+                                DropdownMenuItem(text = { Text(stringResource(R.string.no_contexts)) }, onClick = {}, enabled = false)
                             } else {
                                 availableContexts.forEach { ctx ->
                                     DropdownMenuItem(
@@ -219,12 +220,12 @@ fun EditTaskDialog(
                 },
                 modifier = Modifier.testTag("edit_task_confirm_button")
             ) {
-                Icon(Icons.Default.Check, contentDescription = "Save", tint = Color(0xFF388E3C))
+                Icon(Icons.Default.Check, contentDescription = stringResource(R.string.save_content_desc), tint = Color(0xFF388E3C))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Icon(Icons.Default.Clear, contentDescription = "Cancel", tint = MaterialTheme.colorScheme.error)
+                Icon(Icons.Default.Clear, contentDescription = stringResource(R.string.cancel_content_desc), tint = MaterialTheme.colorScheme.error)
             }
         }
     )

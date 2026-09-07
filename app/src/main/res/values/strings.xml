@@ -1,3 +1,109 @@
 <resources>
     <string name="app_name">Acta Diurna</string>
+
+    <!-- Main Screen -->
+    <string name="today_tasks_count">(%1$d today)</string>
+    <string name="overdue_tasks_count">(%1$d overdue)</string>
+    <string name="more_options">More options</string>
+    <string name="share_todo_file">Share todo.txt file</string>
+    <string name="archive_completed_tasks">Archive completed tasks</string>
+    <string name="open_done_file">Open done.txt file</string>
+    <string name="import_todo_file">Import todo.txt file</string>
+    <string name="clear_all_tasks">Clear all tasks</string>
+    <string name="search_tasks_hint">Search tasks&#8230;</string>
+    <string name="clear_search">Clear search</string>
+    <string name="no_tasks_match_filter">No tasks matching current filter</string>
+    <string name="no_tasks_found">No tasks found</string>
+    <string name="create_task_instruction">Use the quick input bar below to create a task</string>
+    <string name="archive_tasks_dialog_title">Archive Tasks</string>
+    <string name="archive_tasks_dialog_text">Are you sure you want to move all completed tasks to done.txt? This action will clean up your current list.</string>
+    <string name="archive_confirm_button">Archive</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="clear_tasks_dialog_title">Clear All Tasks</string>
+    <string name="clear_tasks_dialog_text">Are you sure you want to permanently delete all tasks in todo.txt? This action cannot be undone and will wipe your current data.</string>
+    <string name="clear_confirm_button">Clear All</string>
+    <string name="import_todo_dialog_title">Import todo.txt</string>
+    <string name="import_todo_dialog_text">Importing a new file will permanently wipe all your current tasks in todo.txt and replace them with the content of the imported file. This action cannot be undone.</string>
+    <string name="import_confirm_button">Import</string>
+
+    <!-- Done Screen -->
+    <string name="archive_title">(Archive)</string>
+    <string name="back_button">Back</string>
+    <string name="archive_options">Archive options</string>
+    <string name="share_done_file">Share done.txt file</string>
+    <string name="import_done_file">Import done.txt file</string>
+    <string name="search_archived_hint">Search archived&#8230;</string>
+    <string name="no_archived_tasks_match">No archived tasks match your search</string>
+    <string name="archive_empty">Archive is empty</string>
+    <string name="selected_count">%1$d selected</string>
+    <string name="unarchive_button">Unarchive</string>
+    <string name="clear_archive_dialog_title">Clear Archive</string>
+    <string name="clear_archive_dialog_text">Are you sure you want to permanently delete all archived tasks in done.txt? This action cannot be undone and will wipe your current data.</string>
+    <string name="import_done_dialog_title">Import done.txt</string>
+    <string name="import_done_dialog_text">Importing a new file will permanently wipe all your current archived tasks in done.txt and replace them with the content of the imported file. This action cannot be undone.</string>
+
+    <!-- Snackbar Messages -->
+    <string name="task_added">Task added</string>
+    <string name="task_completed">Task completed</string>
+    <string name="task_uncompleted">Task uncompleted</string>
+    <string name="priority_set">Priority set to (%1$c)</string>
+    <string name="priority_cleared">Priority cleared</string>
+    <string name="task_updated">Task updated</string>
+    <string name="task_deleted">Task deleted</string>
+    <string name="tasks_saved">Tasks saved</string>
+    <string name="archived_tasks_count">Archived %1$d completed tasks to done.txt</string>
+    <string name="no_tasks_to_archive">No completed tasks to archive</string>
+    <string name="import_success">Successfully imported tasks</string>
+    <string name="import_done_success">Successfully imported archived tasks</string>
+    <string name="import_failed">Failed to import file</string>
+    <string name="archive_cleared">Archive cleared</string>
+    <string name="all_tasks_cleared">All tasks cleared</string>
+    <string name="unarchived_tasks_count">Unarchived %1$d tasks</string>
+    <string name="share_chooser_title">Share %1$s file via</string>
+    <string name="reset_to_sample_tasks">Reset to sample tasks</string>
+    <string name="welcome_task_text">Welcome to Acta Diurna @context +project</string>
+
+    <!-- Components -->
+    <string name="date_picker_ok">OK</string>
+    <string name="add_task_title">Add Task</string>
+    <string name="edit_task_title">Edit Task</string>
+    <string name="format_instruction">Format: (A) yyyy-mm-dd Task @ctx +prj due:yyyy-mm-dd</string>
+    <string name="due_date_content_desc">Due Date</string>
+    <string name="priority_content_desc">Priority</string>
+    <string name="priority_none">None</string>
+    <string name="project_content_desc">Project</string>
+    <string name="no_projects">No projects</string>
+    <string name="context_content_desc">Context</string>
+    <string name="no_contexts">No contexts</string>
+    <string name="save_content_desc">Save</string>
+    <string name="cancel_content_desc">Cancel</string>
+
+    <!-- Control Bar -->
+    <string name="edit_content_desc">Edit</string>
+    <string name="add_content_desc">Add</string>
+    <string name="delete_content_desc">Delete</string>
+    <string name="no_projects_defined">No projects defined</string>
+    <string name="no_contexts_defined">No contexts defined</string>
+
+    <!-- Task Item Card -->
+    <string name="task_options">Task options</string>
+    <string name="edit_task_menu">Edit Task</string>
+    <string name="set_priority_menu">Set Priority&#8230;</string>
+    <string name="delete_menu">Delete</string>
+    <string name="priority_label">Priority (%1$c)</string>
+    <string name="remove_priority_menu">Remove priority</string>
+
+    <!-- Sort Labels -->
+    <string name="filter_all">All</string>
+    <string name="filter_active">Active</string>
+    <string name="filter_completed">Completed</string>
+
+    <string name="sort_priority">Priority</string>
+    <string name="sort_alphabetical">A-Z</string>
+    <string name="sort_project">Project</string>
+    <string name="sort_context">Context</string>
+    <string name="sort_due_date">Due Date</string>
+    <string name="sort_creation_date">Creation Date</string>
+    <string name="sort_completion_date">Completion Date</string>
+    <string name="sort_line_order">File Order</string>
 </resources>

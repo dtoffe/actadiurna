@@ -4,7 +4,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -66,11 +65,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.StatusFilter
 import com.github.dtoffe.actadiurna.ui.components.EditTaskDialog
@@ -142,7 +143,7 @@ fun TodoListScreen(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "Acta Diurna",
+                            text = stringResource(R.string.app_name),
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace
@@ -150,14 +151,14 @@ fun TodoListScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "($dueTodayCount today)",
+                            text = stringResource(R.string.today_tasks_count, dueTodayCount),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         if (overdueCount > 0) {
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
-                                text = "($overdueCount overdue)",
+                                text = stringResource(R.string.overdue_tasks_count, overdueCount),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.error
                             )
@@ -171,7 +172,7 @@ fun TodoListScreen(
                             onClick = { showMenu = true },
                             modifier = Modifier.testTag("overflow_menu_button")
                         ) {
-                            Icon(Icons.Default.MoreVert, contentDescription = "More options")
+                            Icon(Icons.Default.MoreVert, contentDescription = stringResource(R.string.more_options))
                         }
 
                         DropdownMenu(
@@ -179,7 +180,7 @@ fun TodoListScreen(
                             onDismissRequest = { showMenu = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Share todo.txt file") },
+                                text = { Text(stringResource(R.string.share_todo_file)) },
                                 leadingIcon = { Icon(Icons.Default.Share, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -188,7 +189,7 @@ fun TodoListScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Archive completed tasks") },
+                                text = { Text(stringResource(R.string.archive_completed_tasks)) },
                                 leadingIcon = { Icon(Icons.Default.Check, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -196,7 +197,7 @@ fun TodoListScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Open done.txt file") },
+                                text = { Text(stringResource(R.string.open_done_file)) },
                                 leadingIcon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -204,7 +205,7 @@ fun TodoListScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Import todo.txt file") },
+                                text = { Text(stringResource(R.string.import_todo_file)) },
                                 leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -217,7 +218,7 @@ fun TodoListScreen(
                                 )
                             )
                             DropdownMenuItem(
-                                text = { Text("Clear all tasks") },
+                                text = { Text(stringResource(R.string.clear_all_tasks)) },
                                 leadingIcon = { Icon(Icons.Default.Clear, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -292,7 +293,7 @@ fun TodoListScreen(
                                     Box(modifier = Modifier.weight(1f)) {
                                         if (searchQuery.isEmpty()) {
                                             Text(
-                                                "Search tasks...",
+                                                stringResource(R.string.search_tasks_hint),
                                                 style = MaterialTheme.typography.bodyMedium,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
@@ -306,7 +307,7 @@ fun TodoListScreen(
                                         ) {
                                             Icon(
                                                 Icons.Default.Clear,
-                                                contentDescription = "Clear search",
+                                                contentDescription = stringResource(R.string.clear_search),
                                                 modifier = Modifier.size(18.dp),
                                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
@@ -342,7 +343,7 @@ fun TodoListScreen(
                                     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                                         Icon(
                                             imageVector = icon,
-                                            contentDescription = option.label,
+                                            contentDescription = stringResource(option.labelRes),
                                             modifier = Modifier.size(20.dp),
                                             tint = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer 
                                                    else MaterialTheme.colorScheme.onSurfaceVariant
@@ -383,16 +384,16 @@ fun TodoListScreen(
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
                             text = if (searchQuery.isNotEmpty() || (selectedContext != null) || (selectedProject != null))
-                                "No tasks matching current filter"
+                                stringResource(R.string.no_tasks_match_filter)
                             else
-                                "No tasks found",
+                                stringResource(R.string.no_tasks_found),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Use the quick input bar below to create a task",
+                            text = stringResource(R.string.create_task_instruction),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.outline,
                             textAlign = TextAlign.Center
@@ -475,8 +476,8 @@ fun TodoListScreen(
         if (showArchiveConfirmation) {
             AlertDialog(
                 onDismissRequest = { viewModel.showArchiveConfirmation.value = false },
-                title = { Text("Archive Tasks") },
-                text = { Text("Are you sure you want to move all completed tasks to done.txt? This action will clean up your current list.") },
+                title = { Text(stringResource(R.string.archive_tasks_dialog_title)) },
+                text = { Text(stringResource(R.string.archive_tasks_dialog_text)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -484,12 +485,12 @@ fun TodoListScreen(
                             viewModel.archiveCompleted()
                         }
                     ) {
-                        Text("Archive", color = MaterialTheme.colorScheme.primary)
+                        Text(stringResource(R.string.archive_confirm_button), color = MaterialTheme.colorScheme.primary)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { viewModel.showArchiveConfirmation.value = false }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                 }
             )
@@ -499,8 +500,8 @@ fun TodoListScreen(
         if (showClearTasksConfirmation) {
             AlertDialog(
                 onDismissRequest = { showClearTasksConfirmation = false },
-                title = { Text("Clear All Tasks") },
-                text = { Text("Are you sure you want to permanently delete all tasks in todo.txt? This action cannot be undone and will wipe your current data.") },
+                title = { Text(stringResource(R.string.clear_tasks_dialog_title)) },
+                text = { Text(stringResource(R.string.clear_tasks_dialog_text)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -508,12 +509,12 @@ fun TodoListScreen(
                             viewModel.clearAllTasks()
                         }
                     ) {
-                        Text("Clear All", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.clear_confirm_button), color = MaterialTheme.colorScheme.error)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showClearTasksConfirmation = false }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                 }
             )
@@ -523,8 +524,8 @@ fun TodoListScreen(
         if (showImportConfirmation) {
             AlertDialog(
                 onDismissRequest = { showImportConfirmation = false },
-                title = { Text("Import todo.txt") },
-                text = { Text("Importing a new file will permanently wipe all your current tasks in todo.txt and replace them with the content of the imported file. This action cannot be undone.") },
+                title = { Text(stringResource(R.string.import_todo_dialog_title)) },
+                text = { Text(stringResource(R.string.import_todo_dialog_text)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -532,12 +533,12 @@ fun TodoListScreen(
                             fileImportLauncher.launch("text/*")
                         }
                     ) {
-                        Text("Import", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.import_confirm_button), color = MaterialTheme.colorScheme.error)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showImportConfirmation = false }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                 }
             )

@@ -57,10 +57,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.ui.components.TaskItemCard
 import com.github.dtoffe.actadiurna.ui.theme.TodoIcons
@@ -93,7 +95,7 @@ fun DoneScreen(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "Acta Diurna",
+                            text = stringResource(R.string.app_name),
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace
@@ -101,7 +103,7 @@ fun DoneScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "(Archive)",
+                            text = stringResource(R.string.archive_title),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
                         )
@@ -109,14 +111,14 @@ fun DoneScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back_button))
                     }
                 },
                 actions = {
                     // Options Menu
                     Box {
                         IconButton(onClick = { showMenu = true }) {
-                            Icon(Icons.Default.MoreVert, contentDescription = "Archive options")
+                            Icon(Icons.Default.MoreVert, contentDescription = stringResource(R.string.archive_options))
                         }
 
                         DropdownMenu(
@@ -124,7 +126,7 @@ fun DoneScreen(
                             onDismissRequest = { showMenu = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Share done.txt file") },
+                                text = { Text(stringResource(R.string.share_done_file)) },
                                 leadingIcon = { Icon(Icons.Default.Share, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -133,7 +135,7 @@ fun DoneScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Import done.txt file") },
+                                text = { Text(stringResource(R.string.import_done_file)) },
                                 leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -145,7 +147,7 @@ fun DoneScreen(
                                 )
                             )
                             DropdownMenuItem(
-                                text = { Text("Clear all tasks") },
+                                text = { Text(stringResource(R.string.clear_all_tasks)) },
                                 leadingIcon = { Icon(Icons.Default.Clear, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
@@ -221,7 +223,7 @@ fun DoneScreen(
                                     Box(modifier = Modifier.weight(1f)) {
                                         if (searchQuery.isEmpty()) {
                                             Text(
-                                                "Search archived...",
+                                                stringResource(R.string.search_archived_hint),
                                                 style = MaterialTheme.typography.bodyMedium,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
@@ -235,7 +237,7 @@ fun DoneScreen(
                                         ) {
                                             Icon(
                                                 Icons.Default.Clear,
-                                                contentDescription = "Clear search",
+                                                contentDescription = stringResource(R.string.clear_search),
                                                 modifier = Modifier.size(18.dp),
                                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
@@ -272,7 +274,7 @@ fun DoneScreen(
                                     Box(modifier = Modifier.size(24.dp), contentAlignment = Alignment.Center) {
                                         Icon(
                                             imageVector = icon,
-                                            contentDescription = option.label,
+                                            contentDescription = stringResource(option.labelRes),
                                             modifier = Modifier.size(18.dp),
                                             tint = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer 
                                                    else MaterialTheme.colorScheme.onSurfaceVariant
@@ -312,7 +314,10 @@ fun DoneScreen(
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = if (searchQuery.isNotEmpty()) "No archived tasks match your search" else "Archive is empty",
+                            text = if (items.isEmpty()) {
+                                if (searchQuery.isNotEmpty()) stringResource(R.string.no_archived_tasks_match) 
+                                else stringResource(R.string.archive_empty)
+                            } else "",
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center
@@ -353,11 +358,11 @@ fun DoneScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("${selectedIds.size} selected", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.selected_count, selectedIds.size), style = MaterialTheme.typography.bodyMedium)
                         TextButton(onClick = { viewModel.unarchiveSelectedTasks() }) {
                             Icon(Icons.Default.Refresh, contentDescription = null)
                             Spacer(Modifier.width(8.dp))
-                            Text("Unarchive")
+                            Text(stringResource(R.string.unarchive_button))
                         }
                     }
                 }
@@ -367,8 +372,8 @@ fun DoneScreen(
         if (showClearConfirmation) {
             AlertDialog(
                 onDismissRequest = { viewModel.showClearArchiveConfirmation.value = false },
-                title = { Text("Clear Archive") },
-                text = { Text("Are you sure you want to permanently delete all archived tasks in done.txt? This action cannot be undone and will wipe your current data.") },
+                title = { Text(stringResource(R.string.clear_archive_dialog_title)) },
+                text = { Text(stringResource(R.string.clear_archive_dialog_text)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -376,12 +381,12 @@ fun DoneScreen(
                             viewModel.clearArchive()
                         }
                     ) {
-                        Text("Clear All", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.clear_confirm_button), color = MaterialTheme.colorScheme.error)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { viewModel.showClearArchiveConfirmation.value = false }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                 }
             )
@@ -390,8 +395,8 @@ fun DoneScreen(
         if (showImportConfirmation) {
             AlertDialog(
                 onDismissRequest = { showImportConfirmation = false },
-                title = { Text("Import done.txt") },
-                text = { Text("Importing a new file will permanently wipe all your current archived tasks in done.txt and replace them with the content of the imported file. This action cannot be undone.") },
+                title = { Text(stringResource(R.string.import_done_dialog_title)) },
+                text = { Text(stringResource(R.string.import_done_dialog_text)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -399,12 +404,12 @@ fun DoneScreen(
                             fileImportLauncher.launch("text/*")
                         }
                     ) {
-                        Text("Import", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.import_confirm_button), color = MaterialTheme.colorScheme.error)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showImportConfirmation = false }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                 }
             )
