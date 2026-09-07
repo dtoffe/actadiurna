@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Acta Diurna</string>
+
+    <!-- Main Screen -->
+    <string name="today_tasks_count">(%1$d на сегодня)</string>
+    <string name="overdue_tasks_count">(%1$d просрочено)</string>
+    <string name="more_options">Дополнительно</string>
+    <string name="share_todo_file">Поделиться файлом todo.txt</string>
+    <string name="archive_completed_tasks">Архивировать завершенные</string>
+    <string name="open_done_file">Открыть файл done.txt</string>
+    <string name="import_todo_file">Импортировать todo.txt</string>
+    <string name="clear_all_tasks">Очистить список задач</string>
+    <string name="search_tasks_hint">Поиск задач&#8230;</string>
+    <string name="clear_search">Очистить поиск</string>
+    <string name="no_tasks_match_filter">Нет задач, соответствующих фильтру</string>
+    <string name="no_tasks_found">Задач не найдено</string>
+    <string name="create_task_instruction">Используйте строку ввода ниже, чтобы создать задачу</string>
+    <string name="archive_tasks_dialog_title">Архивация задач</string>
+    <string name="archive_tasks_dialog_text">Вы уверены, что хотите перенести все завершенные задачи в done.txt? Это очистит ваш текущий список.</string>
+    <string name="archive_confirm_button">Архивировать</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="clear_tasks_dialog_title">Очистка всех задач</string>
+    <string name="clear_tasks_dialog_text">Вы уверены, что хотите безвозвратно удалить все задачи из todo.txt? Это действие нельзя отменить, оно удалит ваши текущие данные.</string>
+    <string name="clear_confirm_button">Очистить всё</string>
+    <string name="import_todo_dialog_title">Импорт todo.txt</string>
+    <string name="import_todo_dialog_text">Импорт нового файла безвозвратно удалит все текущие задачи из todo.txt и заменит их содержимым импортируемого файла. Это действие нельзя отменить.</string>
+    <string name="import_confirm_button">Импортировать</string>
+
+    <!-- Done Screen -->
+    <string name="archive_title">(Архив)</string>
+    <string name="back_button">Назад</string>
+    <string name="archive_options">Опции архива</string>
+    <string name="share_done_file">Поделиться файлом done.txt</string>
+    <string name="import_done_file">Импортировать done.txt</string>
+    <string name="search_archived_hint">Поиск в архиве&#8230;</string>
+    <string name="no_archived_tasks_match">Нет архивных задач, соответствующих поиску</string>
+    <string name="archive_empty">Архив пуст</string>
+    <string name="selected_count">Выбрано: %1$d</string>
+    <string name="unarchive_button">Вернуть из архива</string>
+    <string name="clear_archive_dialog_title">Очистка архива</string>
+    <string name="clear_archive_dialog_text">Вы уверены, что хотите безвозвратно удалить все архивные задачи из done.txt? Это действие нельзя отменить, оно удалит ваши текущие данные.</string>
+    <string name="import_done_dialog_title">Импорт done.txt</string>
+    <string name="import_done_dialog_text">Импорт нового файла безвозвратно удалит все текущие архивные задачи из done.txt и заменит их содержимым импортируемого файла. Это действие нельзя отменить.</string>
+
+    <!-- Snackbar Messages -->
+    <string name="task_added">Задача добавлена</string>
+    <string name="task_completed">Задача завершена</string>
+    <string name="task_uncompleted">Задача возобновлена</string>
+    <string name="priority_set">Установлен приоритет (%1$c)</string>
+    <string name="priority_cleared">Приоритет удален</string>
+    <string name="task_updated">Задача обновлена</string>
+    <string name="task_deleted">Задача удалена</string>
+    <string name="tasks_saved">Задачи сохранены</string>
+    <string name="archived_tasks_count">Архивировано %1$d завершенных задач в done.txt</string>
+    <string name="no_tasks_to_archive">Нет завершенных задач для архивации</string>
+    <string name="import_success">Задачи успешно импортированы</string>
+    <string name="import_done_success">Архивные задачи успешно импортированы</string>
+    <string name="import_failed">Ошибка импорта файла</string>
+    <string name="archive_cleared">Архив очищен</string>
+    <string name="all_tasks_cleared">Все задачи удалены</string>
+    <string name="unarchived_tasks_count">Восстановлено из архива: %1$d</string>
+    <string name="share_chooser_title">Поделиться файлом %1$s через</string>
+    <string name="reset_to_sample_tasks">Сбросить к примеру</string>
+    <string name="welcome_task_text">Добро пожаловать в Acta Diurna @контекст +проект</string>
+
+    <!-- Components -->
+    <string name="date_picker_ok">ОК</string>
+    <string name="add_task_title">Новая задача</string>
+    <string name="edit_task_title">Редактирование</string>
+    <string name="format_instruction">Формат: (A) гггг-мм-дд Задача @ctx +prj due:гггг-мм-дд</string>
+    <string name="due_date_content_desc">Срок выполнения</string>
+    <string name="priority_content_desc">Приоритет</string>
+    <string name="priority_none">Нет</string>
+    <string name="project_content_desc">Проект</string>
+    <string name="no_projects">Нет проектов</string>
+    <string name="context_content_desc">Контекст</string>
+    <string name="no_contexts">Нет контекстов</string>
+    <string name="save_content_desc">Сохранить</string>
+    <string name="cancel_content_desc">Отмена</string>
+
+    <!-- Control Bar -->
+    <string name="edit_content_desc">Правка</string>
+    <string name="add_content_desc">Добавить</string>
+    <string name="delete_content_desc">Удалить</string>
+    <string name="no_projects_defined">Проекты не определены</string>
+    <string name="no_contexts_defined">Контексты не определены</string>
+
+    <!-- Task Item Card -->
+    <string name="task_options">Опции задачи</string>
+    <string name="edit_task_menu">Изменить задачу</string>
+    <string name="set_priority_menu">Установить приоритет&#8230;</string>
+    <string name="delete_menu">Удалить</string>
+    <string name="priority_label">Приоритет (%1$c)</string>
+    <string name="remove_priority_menu">Удалить приоритет</string>
+
+    <!-- Sort Labels -->
+    <string name="filter_all">Все</string>
+    <string name="filter_active">Активные</string>
+    <string name="filter_completed">Завершенные</string>
+
+    <string name="sort_priority">По приоритету</string>
+    <string name="sort_alphabetical">По алфавиту</string>
+    <string name="sort_project">По проекту</string>
+    <string name="sort_context">По контексту</string>
+    <string name="sort_due_date">По сроку</string>
+    <string name="sort_creation_date">По дате создания</string>
+    <string name="sort_completion_date">По дате завершения</string>
+    <string name="sort_line_order">По порядку в файле</string>
+</resources>

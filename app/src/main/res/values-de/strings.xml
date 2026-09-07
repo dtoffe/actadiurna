@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Acta Diurna</string>
+
+    <!-- Main Screen -->
+    <string name="today_tasks_count">(%1$d für heute)</string>
+    <string name="overdue_tasks_count">(%1$d überfällig)</string>
+    <string name="more_options">Weitere Optionen</string>
+    <string name="share_todo_file">todo.txt-Datei teilen</string>
+    <string name="archive_completed_tasks">Erledigte Aufgaben archivieren</string>
+    <string name="open_done_file">done.txt-Datei öffnen</string>
+    <string name="import_todo_file">todo.txt-Datei importieren</string>
+    <string name="clear_all_tasks">Alle Aufgaben löschen</string>
+    <string name="search_tasks_hint">Aufgaben suchen&#8230;</string>
+    <string name="clear_search">Suche löschen</string>
+    <string name="no_tasks_match_filter">Keine Aufgaben entsprechen dem aktuellen Filter</string>
+    <string name="no_tasks_found">Keine Aufgaben gefunden</string>
+    <string name="create_task_instruction">Verwenden Sie die Schnelleingabeleiste unten, um eine Aufgabe zu erstellen</string>
+    <string name="archive_tasks_dialog_title">Aufgaben archivieren</string>
+    <string name="archive_tasks_dialog_text">Sind Sie sicher, dass Sie alle erledigten Aufgaben nach done.txt verschieben möchten? Diese Aktion bereinigt Ihre aktuelle Liste.</string>
+    <string name="archive_confirm_button">Archivieren</string>
+    <string name="cancel_button">Abbrechen</string>
+    <string name="clear_tasks_dialog_title">Alle Aufgaben löschen</string>
+    <string name="clear_tasks_dialog_text">Sind Sie sicher, dass Sie alle Aufgaben in todo.txt dauerhaft löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden und löscht Ihre aktuellen Daten.</string>
+    <string name="clear_confirm_button">Alle löschen</string>
+    <string name="import_todo_dialog_title">todo.txt importieren</string>
+    <string name="import_todo_dialog_text">Das Importieren einer neuen Datei löscht dauerhaft alle Ihre aktuellen Aufgaben in todo.txt und ersetzt sie durch den Inhalt der importierten Datei. Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="import_confirm_button">Importieren</string>
+
+    <!-- Done Screen -->
+    <string name="archive_title">(Archiv)</string>
+    <string name="back_button">Zurück</string>
+    <string name="archive_options">Archivoptionen</string>
+    <string name="share_done_file">done.txt-Datei teilen</string>
+    <string name="import_done_file">done.txt-Datei importieren</string>
+    <string name="search_archived_hint">Im Archiv suchen&#8230;</string>
+    <string name="no_archived_tasks_match">Keine archivierten Aufgaben entsprechen Ihrer Suche</string>
+    <string name="archive_empty">Archiv ist leer</string>
+    <string name="selected_count">%1$d ausgewählt</string>
+    <string name="unarchive_button">Dearchivieren</string>
+    <string name="clear_archive_dialog_title">Archiv löschen</string>
+    <string name="clear_archive_dialog_text">Sind Sie sicher, dass Sie alle archivierten Aufgaben in done.txt dauerhaft löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden und löscht Ihre aktuellen Daten.</string>
+    <string name="import_done_dialog_title">done.txt importieren</string>
+    <string name="import_done_dialog_text">Das Importieren einer neuen Datei löscht dauerhaft alle Ihre aktuell archivierten Aufgaben in done.txt und ersetzt sie durch den Inhalt der importierten Datei. Diese Aktion kann nicht rückgängig gemacht werden.</string>
+
+    <!-- Snackbar Messages -->
+    <string name="task_added">Aufgabe hinzugefügt</string>
+    <string name="task_completed">Aufgabe erledigt</string>
+    <string name="task_uncompleted">Aufgabe als nicht erledigt markiert</string>
+    <string name="priority_set">Priorität auf (%1$c) gesetzt</string>
+    <string name="priority_cleared">Priorität gelöscht</string>
+    <string name="task_updated">Aufgabe aktualisiert</string>
+    <string name="task_deleted">Aufgabe gelöscht</string>
+    <string name="tasks_saved">Aufgaben gespeichert</string>
+    <string name="archived_tasks_count">%1$d erledigte Aufgaben in done.txt archiviert</string>
+    <string name="no_tasks_to_archive">Keine erledigten Aufgaben zum Archivieren</string>
+    <string name="import_success">Aufgaben erfolgreich importiert</string>
+    <string name="import_done_success">Archivierte Aufgaben erfolgreich importiert</string>
+    <string name="import_failed">Fehler beim Importieren der Datei</string>
+    <string name="archive_cleared">Archiv gelöscht</string>
+    <string name="all_tasks_cleared">Alle Aufgaben gelöscht</string>
+    <string name="unarchived_tasks_count">%1$d Aufgaben dearchiviert</string>
+    <string name="share_chooser_title">%1$s-Datei teilen über</string>
+    <string name="reset_to_sample_tasks">Auf Beispielaufgaben zurücksetzen</string>
+    <string name="welcome_task_text">Willkommen bei Acta Diurna @Kontext +Projekt</string>
+
+    <!-- Components -->
+    <string name="date_picker_ok">OK</string>
+    <string name="add_task_title">Aufgabe hinzufügen</string>
+    <string name="edit_task_title">Aufgabe bearbeiten</string>
+    <string name="format_instruction">Format: (A) jjjj-mm-tt Aufgabe @kontext +projekt due:jjjj-mm-tt</string>
+    <string name="due_date_content_desc">Fälligkeitsdatum</string>
+    <string name="priority_content_desc">Priorität</string>
+    <string name="priority_none">Keine</string>
+    <string name="project_content_desc">Projekt</string>
+    <string name="no_projects">Keine Projekte</string>
+    <string name="context_content_desc">Kontext</string>
+    <string name="no_contexts">Keine Kontexte</string>
+    <string name="save_content_desc">Speichern</string>
+    <string name="cancel_content_desc">Abbrechen</string>
+
+    <!-- Control Bar -->
+    <string name="edit_content_desc">Bearbeiten</string>
+    <string name="add_content_desc">Hinzufügen</string>
+    <string name="delete_content_desc">Löschen</string>
+    <string name="no_projects_defined">Keine Projekte definiert</string>
+    <string name="no_contexts_defined">Keine Kontexte definiert</string>
+
+    <!-- Task Item Card -->
+    <string name="task_options">Aufgabenoptionen</string>
+    <string name="edit_task_menu">Aufgabe bearbeiten</string>
+    <string name="set_priority_menu">Priorität festlegen&#8230;</string>
+    <string name="delete_menu">Löschen</string>
+    <string name="priority_label">Priorität (%1$c)</string>
+    <string name="remove_priority_menu">Priorität entfernen</string>
+
+    <!-- Sort Labels -->
+    <string name="filter_all">Alle</string>
+    <string name="filter_active">Aktive</string>
+    <string name="filter_completed">Erledigte</string>
+
+    <string name="sort_priority">Priorität</string>
+    <string name="sort_alphabetical">A-Z</string>
+    <string name="sort_project">Projekt</string>
+    <string name="sort_context">Kontext</string>
+    <string name="sort_due_date">Fälligkeitsdatum</string>
+    <string name="sort_creation_date">Erstellungsdatum</string>
+    <string name="sort_completion_date">Abschlussdatum</string>
+    <string name="sort_line_order">Dateireihenfolge</string>
+</resources>

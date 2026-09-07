@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Acta Diurna</string>
+
+    <!-- Main Screen -->
+    <string name="today_tasks_count">(%1$d per oggi)</string>
+    <string name="overdue_tasks_count">(%1$d in ritardo)</string>
+    <string name="more_options">Altre opzioni</string>
+    <string name="share_todo_file">Condividi file todo.txt</string>
+    <string name="archive_completed_tasks">Archivia attività completate</string>
+    <string name="open_done_file">Apri file done.txt</string>
+    <string name="import_todo_file">Importa file todo.txt</string>
+    <string name="clear_all_tasks">Cancella tutte le attività</string>
+    <string name="search_tasks_hint">Cerca attività&#8230;</string>
+    <string name="clear_search">Cancella ricerca</string>
+    <string name="no_tasks_match_filter">Nessuna attività corrisponde al filtro attuale</string>
+    <string name="no_tasks_found">Nessuna attività trovata</string>
+    <string name="create_task_instruction">Usa la barra di inserimento rapido qui sotto per creare un\'attività</string>
+    <string name="archive_tasks_dialog_title">Archivia Attività</string>
+    <string name="archive_tasks_dialog_text">Sei sicuro di voler spostare tutte le attività completate in done.txt? Questa azione pulirà la tua lista attuale.</string>
+    <string name="archive_confirm_button">Archivia</string>
+    <string name="cancel_button">Annulla</string>
+    <string name="clear_tasks_dialog_title">Cancella Tutte le Attività</string>
+    <string name="clear_tasks_dialog_text">Sei sicuro di voler eliminare definitivamente tutte le attività in todo.txt? Questa azione non può essere annullata e cancellerà i tuoi dati attuali.</string>
+    <string name="clear_confirm_button">Cancella Tutto</string>
+    <string name="import_todo_dialog_title">Importa todo.txt</string>
+    <string name="import_todo_dialog_text">L\'importazione di un nuovo file cancellerà definitivamente tutte le tue attività attuali in todo.txt e le sostituirà con il contenuto del file importato. Questa azione non può essere annullata.</string>
+    <string name="import_confirm_button">Importa</string>
+
+    <!-- Done Screen -->
+    <string name="archive_title">(Archivio)</string>
+    <string name="back_button">Indietro</string>
+    <string name="archive_options">Opzioni archivio</string>
+    <string name="share_done_file">Condividi file done.txt</string>
+    <string name="import_done_file">Importa file done.txt</string>
+    <string name="search_archived_hint">Cerca nell\'archivio&#8230;</string>
+    <string name="no_archived_tasks_match">Nessuna attività archiviata corrisponde alla tua ricerca</string>
+    <string name="archive_empty">L\'archivio è vuoto</string>
+    <string name="selected_count">%1$d selezionate</string>
+    <string name="unarchive_button">Ripristina</string>
+    <string name="clear_archive_dialog_title">Cancella Archivio</string>
+    <string name="clear_archive_dialog_text">Sei sicuro di voler eliminare definitivamente tutte le attività archiviate in done.txt? Questa azione non può essere annullata e cancellerà i tuoi dati attuali.</string>
+    <string name="import_done_dialog_title">Importa done.txt</string>
+    <string name="import_done_dialog_text">L\'importazione di un nuovo file cancellerà definitivamente tutte le tue attività archiviate attuali in done.txt e le sostituirà con il contenuto del file importato. Questa azione non può essere annullata.</string>
+
+    <!-- Snackbar Messages -->
+    <string name="task_added">Attività aggiunta</string>
+    <string name="task_completed">Attività completata</string>
+    <string name="task_uncompleted">Attività ripristinata</string>
+    <string name="priority_set">Priorità impostata su (%1$c)</string>
+    <string name="priority_cleared">Priorità rimossa</string>
+    <string name="task_updated">Attività aggiornata</string>
+    <string name="task_deleted">Attività eliminata</string>
+    <string name="tasks_saved">Attività salvate</string>
+    <string name="archived_tasks_count">Archiviate %1$d attività completate in done.txt</string>
+    <string name="no_tasks_to_archive">Nessuna attività completata da archiviare</string>
+    <string name="import_success">Attività importate con successo</string>
+    <string name="import_done_success">Attività archiviate importate con successo</string>
+    <string name="import_failed">Impossibile importare il file</string>
+    <string name="archive_cleared">Archivio cancellato</string>
+    <string name="all_tasks_cleared">Tutte le attività cancellate</string>
+    <string name="unarchived_tasks_count">Ripristinate %1$d attività</string>
+    <string name="share_chooser_title">Condividi file %1$s tramite</string>
+    <string name="reset_to_sample_tasks">Ripristina attività di esempio</string>
+    <string name="welcome_task_text">Benvenuto in Acta Diurna @contesto +progetto</string>
+
+    <!-- Components -->
+    <string name="date_picker_ok">OK</string>
+    <string name="add_task_title">Aggiungi Attività</string>
+    <string name="edit_task_title">Modifica Attività</string>
+    <string name="format_instruction">Formato: (A) aaaa-mm-gg Attività @ctx +prj due:aaaa-mm-gg</string>
+    <string name="due_date_content_desc">Data di scadenza</string>
+    <string name="priority_content_desc">Priorità</string>
+    <string name="priority_none">Nessuna</string>
+    <string name="project_content_desc">Progetto</string>
+    <string name="no_projects">Nessun progetto</string>
+    <string name="context_content_desc">Contesto</string>
+    <string name="no_contexts">Nessun contesto</string>
+    <string name="save_content_desc">Salva</string>
+    <string name="cancel_content_desc">Annulla</string>
+
+    <!-- Control Bar -->
+    <string name="edit_content_desc">Modifica</string>
+    <string name="add_content_desc">Aggiungi</string>
+    <string name="delete_content_desc">Elimina</string>
+    <string name="no_projects_defined">Nessun progetto definito</string>
+    <string name="no_contexts_defined">Nessun contesto definito</string>
+
+    <!-- Task Item Card -->
+    <string name="task_options">Opzioni attività</string>
+    <string name="edit_task_menu">Modifica Attività</string>
+    <string name="set_priority_menu">Imposta Priorità&#8230;</string>
+    <string name="delete_menu">Elimina</string>
+    <string name="priority_label">Priorità (%1$c)</string>
+    <string name="remove_priority_menu">Rimuovi priorità</string>
+
+    <!-- Sort Labels -->
+    <string name="filter_all">Tutte</string>
+    <string name="filter_active">Attive</string>
+    <string name="filter_completed">Completate</string>
+
+    <string name="sort_priority">Priorità</string>
+    <string name="sort_alphabetical">A-Z</string>
+    <string name="sort_project">Progetto</string>
+    <string name="sort_context">Contesto</string>
+    <string name="sort_due_date">Data di scadenza</string>
+    <string name="sort_creation_date">Data di creazione</string>
+    <string name="sort_completion_date">Data di completamento</string>
+    <string name="sort_line_order">Ordine file</string>
+</resources>

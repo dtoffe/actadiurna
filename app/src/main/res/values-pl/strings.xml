@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Acta Diurna</string>
+
+    <!-- Main Screen -->
+    <string name="today_tasks_count">(%1$d na dziś)</string>
+    <string name="overdue_tasks_count">(%1$d zaległe)</string>
+    <string name="more_options">Więcej opcji</string>
+    <string name="share_todo_file">Udostępnij plik todo.txt</string>
+    <string name="archive_completed_tasks">Archiwizuj zakończone zadania</string>
+    <string name="open_done_file">Otwórz plik done.txt</string>
+    <string name="import_todo_file">Importuj plik todo.txt</string>
+    <string name="clear_all_tasks">Wyczyść wszystkie zadania</string>
+    <string name="search_tasks_hint">Szukaj zadań&#8230;</string>
+    <string name="clear_search">Wyczyść wyszukiwanie</string>
+    <string name="no_tasks_match_filter">Brak zadań pasujących do filtra</string>
+    <string name="no_tasks_found">Nie znaleziono zadań</string>
+    <string name="create_task_instruction">Użyj paska szybkiego wprowadzania poniżej, aby utworzyć zadanie</string>
+    <string name="archive_tasks_dialog_title">Archiwizuj zadania</string>
+    <string name="archive_tasks_dialog_text">Czy na pewno chcesz przenieść wszystkie zakończone zadania do pliku done.txt? Ta czynność wyczyści Twoją aktualną listę.</string>
+    <string name="archive_confirm_button">Archiwizuj</string>
+    <string name="cancel_button">Anuluj</string>
+    <string name="clear_tasks_dialog_title">Wyczyść wszystkie zadania</string>
+    <string name="clear_tasks_dialog_text">Czy na pewno chcesz trwale usunąć wszystkie zadania z todo.txt? Tej czynności nie można cofnąć i spowoduje ona usunięcie Twoich aktualnych danych.</string>
+    <string name="clear_confirm_button">Wyczyść wszystko</string>
+    <string name="import_todo_dialog_title">Importuj todo.txt</string>
+    <string name="import_todo_dialog_text">Zaimportowanie nowego pliku spowoduje trwałe usunięcie wszystkich aktualnych zadań w todo.txt i zastąpienie ich zawartością importowanego pliku. Tej czynności nie można cofnąć.</string>
+    <string name="import_confirm_button">Importuj</string>
+
+    <!-- Done Screen -->
+    <string name="archive_title">(Archiwum)</string>
+    <string name="back_button">Wstecz</string>
+    <string name="archive_options">Opcje archiwum</string>
+    <string name="share_done_file">Udostępnij plik done.txt</string>
+    <string name="import_done_file">Importuj plik done.txt</string>
+    <string name="search_archived_hint">Szukaj w archiwum&#8230;</string>
+    <string name="no_archived_tasks_match">Brak zarchiwizowanych zadań pasujących do wyszukiwania</string>
+    <string name="archive_empty">Archiwum jest puste</string>
+    <string name="selected_count">Wybrano %1$d</string>
+    <string name="unarchive_button">Przywróć</string>
+    <string name="clear_archive_dialog_title">Wyczyść archiwum</string>
+    <string name="clear_archive_dialog_text">Czy na pewno chcesz trwale usunąć wszystkie zarchiwizowane zadania z done.txt? Tej czynności nie można cofnąć i spowoduje ona usunięcie Twoich aktualnych danych.</string>
+    <string name="import_done_dialog_title">Importuj done.txt</string>
+    <string name="import_done_dialog_text">Zaimportowanie nowego pliku spowoduje trwałe usunięcie wszystkich aktualnie zarchiwizowanych zadań w done.txt i zastąpienie ich zawartością importowanego pliku. Tej czynności nie można cofnąć.</string>
+
+    <!-- Snackbar Messages -->
+    <string name="task_added">Zadanie dodane</string>
+    <string name="task_completed">Zadanie zakończone</string>
+    <string name="task_uncompleted">Zadanie przywrócone</string>
+    <string name="priority_set">Ustawiono priorytet na (%1$c)</string>
+    <string name="priority_cleared">Priorytet usunięty</string>
+    <string name="task_updated">Zadanie zaktualizowane</string>
+    <string name="task_deleted">Zadanie usunięte</string>
+    <string name="tasks_saved">Zadania zapisane</string>
+    <string name="archived_tasks_count">Zarchiwizowano %1$d zakończonych zadań do done.txt</string>
+    <string name="no_tasks_to_archive">Brak zakończonych zadań do archiwizacji</string>
+    <string name="import_success">Pomyślnie zaimportowano zadania</string>
+    <string name="import_done_success">Pomyślnie zaimportowano zarchiwizowane zadania</string>
+    <string name="import_failed">Nie udało się zaimportować pliku</string>
+    <string name="archive_cleared">Archiwum wyczyszczone</string>
+    <string name="all_tasks_cleared">Wszystkie zadania wyczyszczone</string>
+    <string name="unarchived_tasks_count">Przywrócono %1$d zadań</string>
+    <string name="share_chooser_title">Udostępnij plik %1$s przez</string>
+    <string name="reset_to_sample_tasks">Przywróć zadania przykładowe</string>
+    <string name="welcome_task_text">Witaj w Acta Diurna @kontekst +projekt</string>
+
+    <!-- Components -->
+    <string name="date_picker_ok">OK</string>
+    <string name="add_task_title">Dodaj zadanie</string>
+    <string name="edit_task_title">Edytuj zadanie</string>
+    <string name="format_instruction">Format: (A) rrrr-mm-dd Zadanie @kontekst +projekt due:rrrr-mm-dd</string>
+    <string name="due_date_content_desc">Termin</string>
+    <string name="priority_content_desc">Priorytet</string>
+    <string name="priority_none">Brak</string>
+    <string name="project_content_desc">Projekt</string>
+    <string name="no_projects">Brak projektów</string>
+    <string name="context_content_desc">Kontekst</string>
+    <string name="no_contexts">Brak kontekstów</string>
+    <string name="save_content_desc">Zapisz</string>
+    <string name="cancel_content_desc">Anuluj</string>
+
+    <!-- Control Bar -->
+    <string name="edit_content_desc">Edytuj</string>
+    <string name="add_content_desc">Dodaj</string>
+    <string name="delete_content_desc">Usuń</string>
+    <string name="no_projects_defined">Nie zdefiniowano projektów</string>
+    <string name="no_contexts_defined">Nie zdefiniowano kontekstów</string>
+
+    <!-- Task Item Card -->
+    <string name="task_options">Opcje zadania</string>
+    <string name="edit_task_menu">Edytuj zadanie</string>
+    <string name="set_priority_menu">Ustaw priorytet&#8230;</string>
+    <string name="delete_menu">Usuń</string>
+    <string name="priority_label">Priorytet (%1$c)</string>
+    <string name="remove_priority_menu">Usuń priorytet</string>
+
+    <!-- Sort Labels -->
+    <string name="filter_all">Wszystkie</string>
+    <string name="filter_active">Aktywne</string>
+    <string name="filter_completed">Zakończone</string>
+
+    <string name="sort_priority">Priorytet</string>
+    <string name="sort_alphabetical">A-Z</string>
+    <string name="sort_project">Projekt</string>
+    <string name="sort_context">Kontekst</string>
+    <string name="sort_due_date">Termin</string>
+    <string name="sort_creation_date">Data utworzenia</string>
+    <string name="sort_completion_date">Data zakończenia</string>
+    <string name="sort_line_order">Kolejność w pliku</string>
+</resources>

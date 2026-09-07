@@ -19,7 +19,7 @@ android {
 
   androidResources {
     generateLocaleConfig = true
-    localeFilters += listOf("en", "es")
+    localeFilters += listOf("en", "es", "fr", "de", "it", "pt", "ru", "pl")
   }
 
   signingConfigs {
