@@ -63,6 +63,8 @@
     <string name="reset_to_sample_tasks">Сбросить к примеру</string>
     <string name="welcome_task_text">Добро пожаловать в Acta Diurna @контекст +проект</string>
     <string name="settings_title">Настройки</string>
+    <string name="help_title">Справка</string>
+    <string name="about_title">О приложении</string>
 
     <!-- Components -->
     <string name="date_picker_ok">ОК</string>

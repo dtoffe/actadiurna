@@ -63,6 +63,8 @@
     <string name="reset_to_sample_tasks">Redefinir para tarefas de exemplo</string>
     <string name="welcome_task_text">Bem-vindo ao Acta Diurna @contexto +projeto</string>
     <string name="settings_title">Configurações</string>
+    <string name="help_title">Ajuda</string>
+    <string name="about_title">Sobre</string>
 
     <!-- Components -->
     <string name="date_picker_ok">OK</string>

@@ -63,6 +63,8 @@
     <string name="reset_to_sample_tasks">Reset to sample tasks</string>
     <string name="welcome_task_text">Welcome to Acta Diurna @context +project</string>
     <string name="settings_title">Settings</string>
+    <string name="help_title">Help</string>
+    <string name="about_title">About</string>
 
     <!-- Components -->
     <string name="date_picker_ok">OK</string>

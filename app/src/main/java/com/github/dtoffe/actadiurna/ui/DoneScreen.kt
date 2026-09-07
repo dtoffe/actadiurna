@@ -167,7 +167,8 @@ fun DoneScreen(
                                 leadingIcon = { Icon(Icons.Default.Settings, contentDescription = null) },
                                 onClick = {
                                     showMenu = false
-                                    // Action not implemented yet
+                                    viewModel.previousScreen.value = Screen.DONE
+                                    viewModel.currentScreen.value = Screen.SETTINGS
                                 }
                             )
                         }

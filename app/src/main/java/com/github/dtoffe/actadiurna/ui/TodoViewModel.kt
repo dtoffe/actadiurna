@@ -31,7 +31,7 @@ private data class FilterState(
 )
 
 enum class Screen {
-    MAIN, DONE
+    MAIN, DONE, SETTINGS
 }
 
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
@@ -54,6 +54,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     val showClearArchiveConfirmation = MutableStateFlow(false)
 
     val currentScreen = MutableStateFlow(Screen.MAIN)
+    val previousScreen = MutableStateFlow(Screen.MAIN)
 
     // Done Screen State
     val doneItems: StateFlow<List<TodoItem>> = repository.doneItems
