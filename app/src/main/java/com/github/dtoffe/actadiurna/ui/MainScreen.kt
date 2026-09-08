@@ -423,9 +423,6 @@ fun TodoListScreen(
                             TaskItemCard(
                                 item = item,
                                 onToggleCompletion = { viewModel.toggleCompletion(item) },
-                                onUpdatePriority = { p -> viewModel.updatePriority(item, p) },
-                                onEdit = { viewModel.editingTask.value = item },
-                                onDelete = { viewModel.deleteTask(item) },
                                 sortBy = sortBy,
                                 isSelected = selectedTask?.id == item.id,
                                 onSelect = {

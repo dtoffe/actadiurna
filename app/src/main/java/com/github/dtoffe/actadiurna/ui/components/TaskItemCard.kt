@@ -10,25 +10,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,7 +32,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.github.dtoffe.actadiurna.R
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.TodoItem
 import com.github.dtoffe.actadiurna.model.TodoParser
@@ -51,17 +40,12 @@ import com.github.dtoffe.actadiurna.model.TodoParser
 fun TaskItemCard(
     item: TodoItem,
     onToggleCompletion: () -> Unit,
-    onUpdatePriority: (Char?) -> Unit,
-    onEdit: () -> Unit,
-    onDelete: () -> Unit,
     sortBy: SortBy,
     isSelected: Boolean = false,
+    enabled: Boolean = true,
     onSelect: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    var showOptionsMenu by remember { mutableStateOf(false) }
-    var showPriorityMenu by remember { mutableStateOf(false) }
-
     val isOverdue = !item.isCompleted && item.dueDate != null && item.dueDate!! < TodoParser.todayDateString()
 
     val highlightColor = remember(sortBy, item) {
@@ -120,6 +104,7 @@ fun TaskItemCard(
             Checkbox(
                 checked = item.isCompleted,
                 onCheckedChange = { onToggleCompletion() },
+                enabled = enabled,
                 modifier = Modifier
                     .size(24.dp)
                     .testTag("checkbox_${item.id}"),
@@ -144,70 +129,6 @@ fun TaskItemCard(
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.fillMaxWidth()
                 )
-            }
-
-            // Minimal Menu Button
-            Box {
-                IconButton(
-                    onClick = { showOptionsMenu = true },
-                    modifier = Modifier.size(24.dp).testTag("task_menu_${item.id}")
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = stringResource(R.string.task_options),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                        modifier = Modifier.size(16.dp)
-                    )
-                }
-
-                DropdownMenu(
-                    expanded = showOptionsMenu,
-                    onDismissRequest = { showOptionsMenu = false }
-                ) {
-                    DropdownMenuItem(
-                        text = { Text(stringResource(R.string.edit_task_menu)) },
-                        onClick = {
-                            showOptionsMenu = false
-                            onEdit()
-                        }
-                    )
-                    DropdownMenuItem(
-                        text = { Text(stringResource(R.string.set_priority_menu)) },
-                        onClick = {
-                            showOptionsMenu = false
-                            showPriorityMenu = true
-                        }
-                    )
-                    DropdownMenuItem(
-                        text = { Text(stringResource(R.string.delete_menu), color = MaterialTheme.colorScheme.error) },
-                        onClick = {
-                            showOptionsMenu = false
-                            onDelete()
-                        }
-                    )
-                }
-                
-                DropdownMenu(
-                    expanded = showPriorityMenu,
-                    onDismissRequest = { showPriorityMenu = false }
-                ) {
-                    listOf('A', 'B', 'C', 'D').forEach { p ->
-                        DropdownMenuItem(
-                            text = { Text(stringResource(R.string.priority_label, p)) },
-                            onClick = {
-                                onUpdatePriority(p)
-                                showPriorityMenu = false
-                            }
-                        )
-                    }
-                    DropdownMenuItem(
-                        text = { Text(stringResource(R.string.remove_priority_menu)) },
-                        onClick = {
-                            onUpdatePriority(null)
-                            showPriorityMenu = false
-                        }
-                    )
-                }
             }
         }
     }

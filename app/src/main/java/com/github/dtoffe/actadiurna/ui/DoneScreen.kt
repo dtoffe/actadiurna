@@ -346,11 +346,9 @@ fun DoneScreen(
                             TaskItemCard(
                                 item = item,
                                 onToggleCompletion = { },
-                                onUpdatePriority = { },
-                                onEdit = { },
-                                onDelete = { },
                                 sortBy = sortBy,
                                 isSelected = item.id in selectedIds,
+                                enabled = false,
                                 onSelect = {
                                     viewModel.toggleDoneTaskSelection(item.id)
                                 }
