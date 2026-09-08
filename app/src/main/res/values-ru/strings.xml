@@ -66,6 +66,13 @@
     <string name="language_selection_title">Язык</string>
     <string name="system_default">По умолчанию</string>
     <string name="help_title">Справка</string>
+    <string name="help_toc_title">Содержание</string>
+    <string name="help_toc_todotxt">1. Формат todo.txt</string>
+    <string name="help_toc_app">2. Руководство</string>
+    <string name="help_todotxt_header">Формат todo.txt</string>
+    <string name="help_todotxt_content">Acta Diurna использует формат todo.txt, простую текстовую систему для задач:\n\n• Приоритет: (A) в начале.\n• Завершение: x в начале.\n• Даты: формат ГГГГ-ММ-ДД.\n• Проекты: +ИмяПроекта.\n• Контексты: @ИмяКонтекста.\n• Метаданные: ключ:значение (например, due:2026-12-31).</string>
+    <string name="help_app_header">Руководство</string>
+    <string name="help_app_content">Минималистичный дизайн для продуктивности:\n\n• Основной интерфейс: Список задач с поиском и сортировкой по приоритету, проекту или контексту.\n• Взаимодействие: Нажмите на задачу, чтобы выбрать её; используйте нижнюю панель для редактирования, удаления или переключения тегов. Используйте меню карточки (⋮) для быстрых действий.\n• Опции меню: Поделитесь файлом, архивируйте завершенные задачи в done.txt или импортируйте внешний todo.txt.\n• Файлы: todo.txt (активный) и done.txt (архив).\n• Импорт/Экспорт: Используйте «Поделиться» и «Импорт» в верхнем меню для управления данными.</string>
     <string name="about_title">О приложении</string>
     <string name="version_format">Версия %1$s</string>
     <string name="copyright_notice">Copyright © 2026 Alejandro Daniel Toffetti</string>

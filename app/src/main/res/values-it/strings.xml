@@ -66,6 +66,13 @@
     <string name="language_selection_title">Lingua</string>
     <string name="system_default">Predefinito di sistema</string>
     <string name="help_title">Aiuto</string>
+    <string name="help_toc_title">Sommario</string>
+    <string name="help_toc_todotxt">1. Formato todo.txt</string>
+    <string name="help_toc_app">2. Guida all\'applicazione</string>
+    <string name="help_todotxt_header">Formato todo.txt</string>
+    <string name="help_todotxt_content">Acta Diurna utilizza il formato todo.txt, un semplice sistema testuale per le attività:\n\n• Priorità: (A) all\'inizio.\n• Completamento: x all\'inizio.\n• Date: formato AAAA-MM-GG.\n• Progetti: +NomeProgetto.\n• Contesti: @NomeContesto.\n• Metadati: chiave:valore (es. due:2026-12-31).</string>
+    <string name="help_app_header">Guida all\'applicazione</string>
+    <string name="help_app_content">Design minimalista per la produttività:\n\n• UI Principale: Elenco attività con ricerca e ordinamento per priorità, progetto o contesto.\n• Interazione: Tocca un\'attività per selezionarla; usa la barra inferiore per modificare, eliminare o gestire i tag. Usa il menu della scheda (⋮) per azioni rapide.\n• Opzioni del menu: Condividi il file, archivia le attività completate in done.txt o importa un todo.txt esterno.\n• File: todo.txt (attivo) e done.txt (archivio).\n• Import/Export: Usa Condividi e Importa nel menu superiore per gestire i dati.</string>
     <string name="about_title">Informazioni</string>
     <string name="version_format">Versione %1$s</string>
     <string name="copyright_notice">Copyright © 2026 Alejandro Daniel Toffetti</string>
