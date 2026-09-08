@@ -66,6 +66,13 @@
     <string name="language_selection_title">Language</string>
     <string name="system_default">System Default</string>
     <string name="help_title">Help</string>
+    <string name="help_toc_title">Contents</string>
+    <string name="help_toc_todotxt">1. todo.txt Format</string>
+    <string name="help_toc_app">2. Application Guide</string>
+    <string name="help_todotxt_header">todo.txt Format</string>
+    <string name="help_todotxt_content">Acta Diurna uses the todo.txt format, a simple text system for tasks:\n\n• Priority: (A) at the start.\n• Completion: x at the start.\n• Dates: YYYY-MM-DD format.\n• Projects: +ProjectName.\n• Contexts: @ContextName.\n• Metadata: key:value (e.g., due:2026-12-31).</string>
+    <string name="help_app_header">Application Guide</string>
+    <string name="help_app_content">Minimalist design for productivity:\n\n• Main UI: Task list with search and sorting by priority, project, or context.\n• Interaction: Tap a task to select; use the bottom bar to edit, delete, or toggle tags. Use the card menu (⋮) for quick actions.\n• Menu Options: Share your file, Archive completed tasks to done.txt, or Import an external todo.txt.\n• Files: todo.txt (active) and done.txt (archive).\n• Import/Export: Use Share and Import in the top menu to manage data.</string>
     <string name="about_title">About</string>
     <string name="version_format">Version %1$s</string>
     <string name="copyright_notice">Copyright © 2026 Alejandro Daniel Toffetti</string>

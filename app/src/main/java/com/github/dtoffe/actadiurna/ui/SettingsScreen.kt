@@ -2,6 +2,8 @@ package com.github.dtoffe.actadiurna.ui
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -36,11 +38,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
@@ -48,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import com.github.dtoffe.actadiurna.BuildConfig
 import com.github.dtoffe.actadiurna.R
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,6 +62,7 @@ fun SettingsScreen(
     onBack: () -> Unit
 ) {
     val uriHandler = LocalUriHandler.current
+    val scrollState = rememberScrollState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -71,13 +79,13 @@ fun SettingsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
                 .padding(16.dp)
         ) {
             ExpandableSettingsCard(
                 title = stringResource(R.string.settings_title),
                 icon = Icons.Default.Settings,
-                initiallyExpanded = true
+                initiallyExpanded = false
             ) {
                 Column {
                     Text(
@@ -94,7 +102,7 @@ fun SettingsScreen(
                 title = stringResource(R.string.help_title),
                 icon = Icons.AutoMirrored.Filled.List
             ) {
-                // Content for Help
+                HelpContent(scrollState)
             }
 
             ExpandableSettingsCard(
@@ -105,11 +113,10 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Info,
+                    Image(
+                        painter = painterResource(R.drawable.ic_logo),
                         contentDescription = null,
-                        modifier = Modifier.size(64.dp),
-                        tint = MaterialTheme.colorScheme.primary
+                        modifier = Modifier.size(64.dp)
                     )
                     Text(
                         text = stringResource(R.string.app_name),
@@ -218,6 +225,76 @@ fun LanguageSelector() {
                 )
             }
         }
+    }
+}
+
+@Composable
+fun HelpContent(scrollState: ScrollState) {
+    val coroutineScope = rememberCoroutineScope()
+    var todoTxtHeaderY by remember { mutableStateOf(0f) }
+    var appGuideHeaderY by remember { mutableStateOf(0f) }
+    var containerY by remember { mutableStateOf(0f) }
+
+    Column(
+        modifier = Modifier.onGloballyPositioned { containerY = it.positionInRoot().y }
+    ) {
+        Text(
+            text = stringResource(R.string.help_toc_title),
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = stringResource(R.string.help_toc_todotxt),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .clickable {
+                    coroutineScope.launch {
+                        scrollState.animateScrollTo(scrollState.value + (todoTxtHeaderY - containerY).toInt())
+                    }
+                }
+                .padding(vertical = 4.dp)
+        )
+        Text(
+            text = stringResource(R.string.help_toc_app),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .clickable {
+                    coroutineScope.launch {
+                        scrollState.animateScrollTo(scrollState.value + (appGuideHeaderY - containerY).toInt())
+                    }
+                }
+                .padding(vertical = 4.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = stringResource(R.string.help_todotxt_header),
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.onGloballyPositioned { todoTxtHeaderY = it.positionInRoot().y }
+        )
+        Text(
+            text = stringResource(R.string.help_todotxt_content),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = stringResource(R.string.help_app_header),
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.onGloballyPositioned { appGuideHeaderY = it.positionInRoot().y }
+        )
+        Text(
+            text = stringResource(R.string.help_app_content),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(top = 8.dp)
+        )
     }
 }
 
