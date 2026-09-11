@@ -1,0 +1,5 @@
+Erstveröffentlichung von Acta Diurna!
+- Minimalistische todo.txt Aufgabenverwaltung.
+- Mehrfachauswahl-Unterstützung für das Löschen in Stapeln.
+- Umfassender Hilfebereich.
+- Mehrsprachige Unterstützung.

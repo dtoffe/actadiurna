@@ -1,0 +1,5 @@
+Lancio iniziale di Acta Diurna!
+- Gestione attività todo.txt minimalista.
+- Supporto selezione multipla per eliminazione di massa.
+- Sezione di aiuto completa.
+- Supporto multilingua.

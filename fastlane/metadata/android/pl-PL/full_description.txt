@@ -1,0 +1,13 @@
+Acta Diurna to minimalistyczny, otwarty menedżer zadań, który wykorzystuje klasyczny format todo.txt.
+
+Zaprojektowany z myślą o szybkości i prostocie, pozwala zarządzać zadaniami bez zbędnego bałaganu tradycyjnych aplikacji.
+
+Kluczowe cechy:
+• Pełne wsparcie dla formatu todo.txt: priorytety, konteksty, projekty i terminy.
+• Potężne wyszukiwanie i filtrowanie.
+• Zaawansowane sortowanie: według priorytetu, alfabetu, projektu lub kontekstu.
+• Archiwizacja zakończonych zadań do oddzielnego pliku done.txt.
+• Łatwy import i eksport danych.
+• Otwarty kod źródłowy i dbałość o prywatność.
+
+Bądź produktywny dzięki narzędziu, które szanuje Twój sposób pracy.

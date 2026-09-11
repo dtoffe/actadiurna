@@ -1,0 +1,13 @@
+Acta Diurna é um gerenciador de tarefas minimalista e de código aberto que utiliza o clássico formato todo.txt.
+
+Projetado para rapidez e simplicidade, permite que você gerencie suas tarefas sem a bagunça dos aplicativos tradicionais.
+
+Recursos principais:
+• Suporte completo ao formato todo.txt: prioridades, contextos, projetos e datas de vencimento.
+• Pesquisa e filtragem poderosas.
+• Ordenação avançada: por prioridade, alfabeto, projeto ou contexto.
+• Arquive tarefas concluídas em um arquivo done.txt separado.
+• Importe e exporte seus dados facilmente.
+• Código aberto e focado na privacidade.
+
+Mantenha a produtividade com uma ferramenta que respeita o seu fluxo de trabalho.

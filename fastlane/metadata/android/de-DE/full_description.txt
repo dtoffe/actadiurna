@@ -1,0 +1,13 @@
+Acta Diurna ist ein minimalistischer, quelloffener Aufgabenplaner, der das klassische todo.txt-Format verwendet.
+
+Entwickelt für Geschwindigkeit und Einfachheit, ermöglicht es Ihnen, Ihre Aufgaben ohne das Durcheinander traditioneller Apps zu verwalten.
+
+Hauptmerkmale:
+• Volle Unterstützung des todo.txt-Formats: Prioritäten, Kontexte, Projekte und Fälligkeitsdaten.
+• Leistungsstarke Suche und Filterung.
+• Fortgeschrittene Sortierung: nach Priorität, Alphabet, Projekt oder Kontext.
+• Archivieren Sie erledigte Aufgaben in einer separaten done.txt-Datei.
+• Importieren und exportieren Sie Ihre Daten ganz einfach.
+• Quelloffen und auf Privatsphäre ausgerichtet.
+
+Bleiben Sie produktiv mit einem Werkzeug, das Ihren Workflow respektiert.

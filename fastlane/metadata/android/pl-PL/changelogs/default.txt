@@ -1,0 +1,5 @@
+Pierwsze wydanie Acta Diurna!
+- Minimalistyczne zarządzanie zadaniami todo.txt.
+- Wsparcie dla wielu zaznaczeń przy usuwaniu zbiorczym.
+- Kompleksowa sekcja pomocy.
+- Wsparcie dla wielu języków.

@@ -1,0 +1,1 @@
+Semplice gestore di attività todo.txt per Android.

@@ -1,0 +1,1 @@
+Prosty menedżer zadań todo.txt dla Androida.

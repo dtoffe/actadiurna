@@ -1,0 +1,5 @@
+Première version d'Acta Diurna !
+- Gestion des tâches todo.txt minimaliste.
+- Support de la multi-sélection pour la suppression groupée.
+- Section d'aide complète.
+- Support multilingue.

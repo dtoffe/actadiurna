@@ -1,0 +1,13 @@
+Acta Diurna è un gestore di attività minimalista e open-source che utilizza il classico formato todo.txt.
+
+Progettato per velocità e semplicità, ti consente di gestire le tue attività senza il disordine delle app tradizionali.
+
+Caratteristiche principali:
+• Supporto completo del formato todo.txt: priorità, contesti, progetti e date di scadenza.
+• Potente ricerca e filtraggio.
+• Ordinamento avanzato: per priorità, alfabeto, progetto o contesto.
+• Archivia le attività completate in un file done.txt separato.
+• Importa ed esporta i tuoi dati facilmente.
+• Open-source e orientato alla privacy.
+
+Resta produttivo con uno strumento che rispetta il tuo flusso di lavoro.
