@@ -1,0 +1,5 @@
+¡Lanzamiento inicial de Acta Diurna!
+- Gestión de tareas todo.txt minimalista.
+- Soporte de multiselección para borrado por lotes.
+- Sección de ayuda completa.
+- Soporte multi-idioma.

@@ -1,0 +1,5 @@
+Initial release of Acta Diurna!
+- Minimalist todo.txt task management.
+- Multi-selection support for bulk deletion.
+- Comprehensive help section.
+- Multi-language support.
