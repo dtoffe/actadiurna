@@ -37,12 +37,12 @@ import com.github.dtoffe.actadiurna.ui.theme.TodoIcons
 
 @Composable
 fun TaskControlBar(
-    selectedTask: TodoItem?,
+    selectedTasks: List<TodoItem>,
     availableContexts: List<String>,
     availableProjects: List<String>,
     onAddClick: () -> Unit,
     onEditClick: (TodoItem) -> Unit,
-    onDeleteClick: (TodoItem) -> Unit,
+    onDeleteClick: (List<TodoItem>) -> Unit,
     onPriorityChange: (TodoItem, Char?) -> Unit,
     onContextToggle: (TodoItem, String) -> Unit,
     onProjectToggle: (TodoItem, String) -> Unit,
@@ -51,6 +51,9 @@ fun TaskControlBar(
     var showPriorityMenu by remember { mutableStateOf(value = false) }
     var showContextMenu by remember { mutableStateOf(value = false) }
     var showProjectMenu by remember { mutableStateOf(value = false) }
+
+    val singleSelectedTask = if (selectedTasks.size == 1) selectedTasks.first() else null
+    val hasSelection = selectedTasks.isNotEmpty()
 
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -68,29 +71,32 @@ fun TaskControlBar(
         ) {
             // 1. Add / Edit Button
             FilterChip(
-                modifier = Modifier.weight(if (selectedTask != null) 1f else 1.2f),
+                modifier = Modifier.weight(if (hasSelection) 1f else 1.2f),
                 selected = false,
                 onClick = {
-                    if (selectedTask != null) onEditClick(selectedTask) else onAddClick()
+                    if (singleSelectedTask != null) onEditClick(singleSelectedTask) else onAddClick()
                 },
+                enabled = (!hasSelection) || (singleSelectedTask != null),
                 label = {
                     Icon(
-                        imageVector = if (selectedTask != null) Icons.Default.Edit else TodoIcons.AddBold,
-                        contentDescription = stringResource(if (selectedTask != null) R.string.edit_content_desc else R.string.add_content_desc),
+                        imageVector = if (hasSelection) Icons.Default.Edit else TodoIcons.AddBold,
+                        contentDescription = stringResource(if (hasSelection) R.string.edit_content_desc else R.string.add_content_desc),
                         modifier = Modifier.fillMaxWidth(),
-                        tint = if (selectedTask != null) MaterialTheme.colorScheme.onSurfaceVariant 
-                               else Color(0xFF388E3C)
+                        tint = if (hasSelection) {
+                            if (singleSelectedTask != null) MaterialTheme.colorScheme.onSurfaceVariant 
+                            else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f)
+                        } else Color(0xFF388E3C)
                     )
                 },
                 shape = RoundedCornerShape(8.dp)
             )
 
             // 1b. Delete Button (only when selected)
-            if (selectedTask != null) {
+            if (hasSelection) {
                 FilterChip(
                     modifier = Modifier.weight(1f),
                     selected = false,
-                    onClick = { onDeleteClick(selectedTask) },
+                    onClick = { onDeleteClick(selectedTasks) },
                     label = {
                         Icon(
                             imageVector = Icons.Default.Delete,
@@ -107,8 +113,8 @@ fun TaskControlBar(
             Box(modifier = Modifier.weight(1f)) {
                 FilterChip(
                     selected = false,
-                    onClick = { if (selectedTask != null) showPriorityMenu = true },
-                    enabled = selectedTask != null,
+                    onClick = { if (singleSelectedTask != null) showPriorityMenu = true },
+                    enabled = singleSelectedTask != null,
                     label = {
                         Icon(
                             imageVector = Icons.Default.Star,
@@ -118,7 +124,7 @@ fun TaskControlBar(
                     },
                     shape = RoundedCornerShape(8.dp)
                 )
-                if (selectedTask != null) {
+                if (singleSelectedTask != null) {
                     DropdownMenu(
                         expanded = showPriorityMenu,
                         onDismissRequest = { showPriorityMenu = false }
@@ -127,7 +133,7 @@ fun TaskControlBar(
                             DropdownMenuItem(
                                 text = { Text(stringResource(R.string.priority_label, p)) },
                                 onClick = {
-                                    onPriorityChange(selectedTask, p)
+                                    onPriorityChange(singleSelectedTask, p)
                                     showPriorityMenu = false
                                 }
                             )
@@ -135,7 +141,7 @@ fun TaskControlBar(
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.remove_priority_menu)) },
                             onClick = {
-                                onPriorityChange(selectedTask, null)
+                                onPriorityChange(singleSelectedTask, null)
                                 showPriorityMenu = false
                             }
                         )
@@ -147,8 +153,8 @@ fun TaskControlBar(
             Box(modifier = Modifier.weight(1f)) {
                 FilterChip(
                     selected = false,
-                    onClick = { if (selectedTask != null) showProjectMenu = true },
-                    enabled = selectedTask != null,
+                    onClick = { if (singleSelectedTask != null) showProjectMenu = true },
+                    enabled = singleSelectedTask != null,
                     label = {
                         Icon(
                             imageVector = TodoIcons.Project,
@@ -158,7 +164,7 @@ fun TaskControlBar(
                     },
                     shape = RoundedCornerShape(8.dp)
                 )
-                if (selectedTask != null) {
+                if (singleSelectedTask != null) {
                     DropdownMenu(
                         expanded = showProjectMenu,
                         onDismissRequest = { showProjectMenu = false }
@@ -167,14 +173,14 @@ fun TaskControlBar(
                             DropdownMenuItem(text = { Text(stringResource(R.string.no_projects_defined)) }, onClick = {}, enabled = false)
                         } else {
                             availableProjects.forEach { prj ->
-                                val hasProject = selectedTask.projects.contains(prj)
+                                val hasProject = singleSelectedTask.projects.contains(prj)
                                 DropdownMenuItem(
                                     text = { Text("+$prj") },
                                     leadingIcon = {
                                         if (hasProject) Icon(Icons.Default.Add, contentDescription = null)
                                     },
                                     onClick = {
-                                        onProjectToggle(selectedTask, prj)
+                                        onProjectToggle(singleSelectedTask, prj)
                                         showProjectMenu = false
                                     }
                                 )
@@ -188,8 +194,8 @@ fun TaskControlBar(
             Box(modifier = Modifier.weight(1f)) {
                 FilterChip(
                     selected = false,
-                    onClick = { if (selectedTask != null) showContextMenu = true },
-                    enabled = selectedTask != null,
+                    onClick = { if (singleSelectedTask != null) showContextMenu = true },
+                    enabled = singleSelectedTask != null,
                     label = {
                         Icon(
                             imageVector = TodoIcons.Context,
@@ -199,7 +205,7 @@ fun TaskControlBar(
                     },
                     shape = RoundedCornerShape(8.dp)
                 )
-                if (selectedTask != null) {
+                if (singleSelectedTask != null) {
                     DropdownMenu(
                         expanded = showContextMenu,
                         onDismissRequest = { showContextMenu = false }
@@ -208,14 +214,14 @@ fun TaskControlBar(
                             DropdownMenuItem(text = { Text(stringResource(R.string.no_contexts_defined)) }, onClick = {}, enabled = false)
                         } else {
                             availableContexts.forEach { ctx ->
-                                val hasContext = selectedTask.contexts.contains(ctx)
+                                val hasContext = singleSelectedTask.contexts.contains(ctx)
                                 DropdownMenuItem(
                                     text = { Text("@$ctx") },
                                     leadingIcon = {
                                         if (hasContext) Icon(Icons.Default.Add, contentDescription = null)
                                     },
                                     onClick = {
-                                        onContextToggle(selectedTask, ctx)
+                                        onContextToggle(singleSelectedTask, ctx)
                                         showContextMenu = false
                                     }
                                 )

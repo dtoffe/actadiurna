@@ -117,7 +117,7 @@ fun TodoListScreen(
     val overdueCount by viewModel.overdueCount.collectAsState()
 
     val editingTask by viewModel.editingTask.collectAsState()
-    val selectedTask by viewModel.selectedTask.collectAsState()
+    val selectedIds by viewModel.selectedTasks.collectAsState()
     val snackbarMessage by viewModel.snackbarMessage.collectAsState()
     val showArchiveConfirmation by viewModel.showArchiveConfirmation.collectAsState()
     var showClearTasksConfirmation by remember { mutableStateOf(false) }
@@ -424,9 +424,9 @@ fun TodoListScreen(
                                 item = item,
                                 onToggleCompletion = { viewModel.toggleCompletion(item) },
                                 sortBy = sortBy,
-                                isSelected = selectedTask?.id == item.id,
+                                isSelected = item.id in selectedIds,
                                 onSelect = {
-                                    viewModel.selectedTask.value = if (selectedTask?.id == item.id) null else item
+                                    viewModel.toggleTaskSelection(item.id)
                                 }
                             )
                         }
@@ -436,7 +436,7 @@ fun TodoListScreen(
 
             // 3. Task Control Bar at bottom
             TaskControlBar(
-                selectedTask = selectedTask,
+                selectedTasks = items.filter { it.id in selectedIds },
                 availableContexts = allContexts,
                 availableProjects = allProjects,
                 onAddClick = {
@@ -449,8 +449,8 @@ fun TodoListScreen(
                 onEditClick = { task ->
                     viewModel.editingTask.value = task
                 },
-                onDeleteClick = { task ->
-                    viewModel.deleteTask(task)
+                onDeleteClick = { tasks ->
+                    viewModel.deleteTasks(tasks.map { it.id }.toSet())
                 },
                 onPriorityChange = { task, pri ->
                     viewModel.updatePriority(task, pri)

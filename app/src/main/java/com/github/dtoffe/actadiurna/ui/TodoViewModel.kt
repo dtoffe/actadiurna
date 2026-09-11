@@ -48,7 +48,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     val sortBy = MutableStateFlow(SortBy.PRIORITY)
 
     val editingTask = MutableStateFlow<TodoItem?>(null)
-    val selectedTask = MutableStateFlow<TodoItem?>(null)
+    val selectedTasks = MutableStateFlow<Set<Int>>(emptySet())
     val snackbarMessage = MutableStateFlow<String?>(null)
     val showArchiveConfirmation = MutableStateFlow(false)
     val showClearArchiveConfirmation = MutableStateFlow(false)
@@ -276,20 +276,15 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
             repository.updateTaskText(item, finalLine)
             editingTask.value = null
-            if (selectedTask.value?.id == item.id) {
-                // Refresh selection with updated item
-                selectedTask.value = repository.items.value.find { it.id == item.id }
-            }
             snackbarMessage.value = getApplication<Application>().getString(R.string.task_updated)
         }
     }
 
-    fun deleteTask(item: TodoItem) {
+    fun deleteTasks(ids: Set<Int>) {
         viewModelScope.launch {
-            repository.deleteTask(item)
-            if (selectedTask.value?.id == item.id) {
-                selectedTask.value = null
-            }
+            val toDelete = items.value.filter { it.id in ids }
+            toDelete.forEach { repository.deleteTask(it) }
+            selectedTasks.value = selectedTasks.value - ids
             snackbarMessage.value = getApplication<Application>().getString(R.string.task_deleted)
         }
     }
@@ -350,6 +345,11 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
                 snackbarMessage.value = getApplication<Application>().getString(R.string.unarchived_tasks_count, toUnarchive.size)
             }
         }
+    }
+
+    fun toggleTaskSelection(id: Int) {
+        val current = selectedTasks.value
+        selectedTasks.value = if (id in current) current - id else current + id
     }
 
     fun toggleDoneTaskSelection(id: Int) {
