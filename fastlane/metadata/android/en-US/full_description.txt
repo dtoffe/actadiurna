@@ -1,3 +1,5 @@
+Plan and build your day like a Roman architect.
+
 Acta Diurna is a minimalist, open-source task manager that uses the classic todo.txt format.
 
 Designed for speed and simplicity, it allows you to manage your tasks without the clutter of traditional apps.

@@ -1,6 +1,6 @@
 # Acta Diurna
 
-**Plan your day like a Roman Emperor.**
+**Plan and build your day like a Roman architect.**
 
 Acta Diurna (**akta diˈurna**) is a minimalist offline plain `todo.txt` editor for Android. It focuses on quick task management, efficient filtering, and structured sorting, all while respecting your privacy.
 

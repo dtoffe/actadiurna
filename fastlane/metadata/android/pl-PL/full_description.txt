@@ -1,3 +1,5 @@
+Planuj i buduj swój dzień jak rzymski architekt.
+
 Acta Diurna to minimalistyczny, otwarty menedżer zadań, który wykorzystuje klasyczny format todo.txt.
 
 Zaprojektowany z myślą o szybkości i prostocie, pozwala zarządzać zadaniami bez zbędnego bałaganu tradycyjnych aplikacji.

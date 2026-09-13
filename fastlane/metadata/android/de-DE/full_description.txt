@@ -1,3 +1,5 @@
+Plane und baue deinen Tag wie ein römischer Architekt.
+
 Acta Diurna ist ein minimalistischer, quelloffener Aufgabenplaner, der das klassische todo.txt-Format verwendet.
 
 Entwickelt für Geschwindigkeit und Einfachheit, ermöglicht es Ihnen, Ihre Aufgaben ohne das Durcheinander traditioneller Apps zu verwalten.
