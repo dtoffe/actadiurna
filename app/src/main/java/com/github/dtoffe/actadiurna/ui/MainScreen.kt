@@ -348,11 +348,11 @@ fun TodoListScreen(
                         )
 
                         sortOptions.forEach { (option, icon) ->
-                            val isSelected = sortBy == option
+                            val isSelected = (sortBy == option) || (option == SortBy.ALPHABETICAL && sortBy == SortBy.ALPHABETICAL_DESC)
                             FilterChip(
                                 modifier = Modifier.weight(1f),
                                 selected = isSelected,
-                                onClick = { viewModel.sortBy.value = option },
+                                onClick = { viewModel.toggleSort(option) },
                                 label = {
                                     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                                         Icon(

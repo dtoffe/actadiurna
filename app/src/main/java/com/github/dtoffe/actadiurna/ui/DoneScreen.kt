@@ -278,11 +278,11 @@ fun DoneScreen(
                         )
 
                         sortOptions.forEach { (option, icon) ->
-                            val isSelected = sortBy == option
+                            val isSelected = (sortBy == option) || (option == SortBy.ALPHABETICAL && sortBy == SortBy.ALPHABETICAL_DESC)
                             FilterChip(
                                 modifier = Modifier.padding(horizontal = 2.dp),
                                 selected = isSelected,
-                                onClick = { viewModel.doneSortBy.value = option },
+                                onClick = { viewModel.toggleSort(option, isDoneScreen = true) },
                                 label = {
                                     Box(modifier = Modifier.size(24.dp), contentAlignment = Alignment.Center) {
                                         Icon(

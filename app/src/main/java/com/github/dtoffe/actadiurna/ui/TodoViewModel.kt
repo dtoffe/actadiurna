@@ -140,6 +140,10 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
                 compareBy<TodoItem> { it.isCompleted }
                     .thenBy { it.text.lowercase() }
             )
+            SortBy.ALPHABETICAL_DESC -> list.sortedWith(
+                compareBy<TodoItem> { it.isCompleted }
+                    .thenByDescending { it.text.lowercase() }
+            )
             SortBy.PROJECT -> list.sortedWith(
                 compareBy<TodoItem> { it.isCompleted }
                     .thenBy { it.projects.firstOrNull()?.lowercase() ?: "zzzzzz" }
@@ -185,6 +189,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
         when (sort) {
             SortBy.ALPHABETICAL -> list.sortedWith(compareBy<TodoItem> { it.text.lowercase() }.then(baseComparator))
+            SortBy.ALPHABETICAL_DESC -> list.sortedWith(compareByDescending<TodoItem> { it.text.lowercase() }.then(baseComparator))
             SortBy.PRIORITY -> list.sortedWith(compareBy<TodoItem> { it.priority ?: ('Z' + 1) }.then(baseComparator))
             SortBy.PROJECT -> list.sortedWith(compareBy<TodoItem> { it.projects.firstOrNull() ?: "zzz" }.then(baseComparator))
             SortBy.CONTEXT -> list.sortedWith(compareBy<TodoItem> { it.contexts.firstOrNull() ?: "zzz" }.then(baseComparator))
@@ -344,6 +349,15 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
                 selectedDoneTasks.value = emptySet()
                 snackbarMessage.value = getApplication<Application>().getString(R.string.unarchived_tasks_count, toUnarchive.size)
             }
+        }
+    }
+
+    fun toggleSort(target: SortBy, isDoneScreen: Boolean = false) {
+        val flow = if (isDoneScreen) doneSortBy else sortBy
+        if (target == SortBy.ALPHABETICAL || target == SortBy.ALPHABETICAL_DESC) {
+            flow.value = if (flow.value == SortBy.ALPHABETICAL) SortBy.ALPHABETICAL_DESC else SortBy.ALPHABETICAL
+        } else {
+            flow.value = target
         }
     }
 

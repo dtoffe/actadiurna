@@ -12,6 +12,7 @@ enum class StatusFilter(@StringRes val labelRes: Int) {
 enum class SortBy(@StringRes val labelRes: Int) {
     PRIORITY(R.string.sort_priority),
     ALPHABETICAL(R.string.sort_alphabetical),
+    ALPHABETICAL_DESC(R.string.sort_alphabetical),
     PROJECT(R.string.sort_project),
     CONTEXT(R.string.sort_context),
     DUE_DATE(R.string.sort_due_date),
