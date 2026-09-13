@@ -22,6 +22,16 @@ android {
     localeFilters += listOf("en", "es", "fr", "de", "it", "pt", "ru", "pl")
   }
 
+  flavorDimensions += "distribution"
+  productFlavors {
+    create("play") {
+      dimension = "distribution"
+    }
+    create("fdroid") {
+      dimension = "distribution"
+    }
+  }
+
   signingConfigs {
     create("release") {
       val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
