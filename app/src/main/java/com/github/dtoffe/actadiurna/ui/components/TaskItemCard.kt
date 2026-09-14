@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -22,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -31,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.sp
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.TodoItem
@@ -67,7 +70,7 @@ fun TaskItemCard(
             Color(0xFFFFEBEE), // Red 50
             Color(0xFFEFEBE9), // Brown 50
         )
-        colors[Math.abs(tag.hashCode()) % colors.size]
+        colors[kotlin.math.abs(tag.hashCode()) % colors.size]
     }
 
     val cardBg by animateColorAsState(
@@ -100,33 +103,51 @@ fun TaskItemCard(
                 .padding(horizontal = 4.dp, vertical = 2.dp),
             verticalAlignment = Alignment.Top
         ) {
-            // Compact Checkbox
-            Checkbox(
-                checked = item.isCompleted,
-                onCheckedChange = { onToggleCompletion() },
-                enabled = enabled,
+            val style = MaterialTheme.typography.bodyMedium
+            val density = LocalDensity.current
+            val firstLineHeight = remember(density, style.lineHeight, style.fontSize) {
+                val lh = style.lineHeight
+                if (lh.isSpecified) {
+                    with(density) { lh.toDp() }
+                } else {
+                    with(density) { (style.fontSize * 1.4f).toDp() }
+                }
+            }
+
+            // Compact Checkbox centered in the first line height
+            Box(
                 modifier = Modifier
-                    .size(24.dp)
-                    .testTag("checkbox_${item.id}"),
-                colors = CheckboxDefaults.colors(
-                    checkedColor = MaterialTheme.colorScheme.secondary,
-                    uncheckedColor = MaterialTheme.colorScheme.outline
+                    .height(firstLineHeight)
+                    .align(Alignment.Top),
+                contentAlignment = Alignment.Center
+            ) {
+                Checkbox(
+                    checked = item.isCompleted,
+                    onCheckedChange = { onToggleCompletion() },
+                    enabled = enabled,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .testTag("checkbox_${item.id}"),
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = MaterialTheme.colorScheme.secondary,
+                        uncheckedColor = MaterialTheme.colorScheme.outline
+                    )
                 )
-            )
+            }
 
             Spacer(modifier = Modifier.width(4.dp))
 
             // Main Content Flow (One big Text block)
             val annotatedString = buildTaskAnnotatedString(item, isOverdue)
             
-            Box(modifier = Modifier
-                .weight(1f)
-                .padding(top = 2.dp, bottom = 2.dp)
-                .clickable { onSelect() }
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable { onSelect() }
             ) {
                 Text(
                     text = annotatedString,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = style,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
