@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">Импорт нового файла безвозвратно удалит все текущие задачи из todo.txt и заменит их содержимым импортируемого файла. Это действие нельзя отменить.</string>
     <string name="import_confirm_button">Импортировать</string>
 
+    <string name="delete_tasks_dialog_title">Удаление задач</string>
+    <string name="delete_tasks_dialog_text">Вы уверены, что хотите безвозвратно удалить %1$d выбранных задач? Это действие нельзя отменить.</string>
+    <string name="delete_confirm_button">Удалить</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Архив)</string>
     <string name="back_button">Назад</string>

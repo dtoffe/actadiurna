@@ -132,6 +132,7 @@ fun TodoListScreen(
     val showArchiveConfirmation by viewModel.showArchiveConfirmation.collectAsState()
     var showClearTasksConfirmation by remember { mutableStateOf(false) }
     var showImportConfirmation by remember { mutableStateOf(false) }
+    var showDeleteConfirmation by remember { mutableStateOf(false) }
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -461,8 +462,8 @@ fun TodoListScreen(
                 onEditClick = { task ->
                     viewModel.editingTask.value = task
                 },
-                onDeleteClick = { tasks ->
-                    viewModel.deleteTasks(tasks.map { it.id }.toSet())
+                onDeleteClick = {
+                    showDeleteConfirmation = true
                 },
                 onPriorityChange = { task, pri ->
                     viewModel.updatePriority(task, pri)
@@ -561,6 +562,30 @@ fun TodoListScreen(
                 },
                 dismissButton = {
                     TextButton(onClick = { showImportConfirmation = false }) {
+                        Text(stringResource(R.string.cancel_button))
+                    }
+                }
+            )
+        }
+
+        // Delete Selected Tasks Confirmation Dialog
+        if (showDeleteConfirmation) {
+            AlertDialog(
+                onDismissRequest = { showDeleteConfirmation = false },
+                title = { Text(stringResource(R.string.delete_tasks_dialog_title)) },
+                text = { Text(stringResource(R.string.delete_tasks_dialog_text, selectedIds.size)) },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showDeleteConfirmation = false
+                            viewModel.deleteTasks(selectedIds)
+                        }
+                    ) {
+                        Text(stringResource(R.string.delete_confirm_button), color = MaterialTheme.colorScheme.error)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showDeleteConfirmation = false }) {
                         Text(stringResource(R.string.cancel_button))
                     }
                 }

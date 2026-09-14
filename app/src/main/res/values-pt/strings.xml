@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">A importação de um novo arquivo excluirá permanentemente todas as suas tarefas atuais em todo.txt e as substituirá pelo conteúdo do arquivo importado. Esta ação não pode ser desfeita.</string>
     <string name="import_confirm_button">Importar</string>
 
+    <string name="delete_tasks_dialog_title">Eliminar Tarefas</string>
+    <string name="delete_tasks_dialog_text">Tem certeza de que deseja eliminar permanentemente as %1$d tarefas selecionadas? Esta ação não pode ser desfeita.</string>
+    <string name="delete_confirm_button">Eliminar</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Arquivo)</string>
     <string name="back_button">Voltar</string>

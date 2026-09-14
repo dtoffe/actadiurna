@@ -27,6 +27,7 @@ import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
@@ -92,6 +93,7 @@ fun DoneScreen(
 
     val showClearConfirmation by viewModel.showClearArchiveConfirmation.collectAsState()
     var showImportConfirmation by remember { mutableStateOf(false) }
+    var showDeleteConfirmation by remember { mutableStateOf(false) }
 
     val fileImportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -381,7 +383,13 @@ fun DoneScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(stringResource(R.string.selected_count, selectedIds.size), style = MaterialTheme.typography.bodyMedium)
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(stringResource(R.string.selected_count, selectedIds.size), style = MaterialTheme.typography.bodyMedium)
+                            Spacer(Modifier.width(8.dp))
+                            IconButton(onClick = { showDeleteConfirmation = true }) {
+                                Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.delete_content_desc), tint = MaterialTheme.colorScheme.error)
+                            }
+                        }
                         TextButton(onClick = { viewModel.unarchiveSelectedTasks() }) {
                             Icon(Icons.Default.Refresh, contentDescription = null)
                             Spacer(Modifier.width(8.dp))
@@ -432,6 +440,29 @@ fun DoneScreen(
                 },
                 dismissButton = {
                     TextButton(onClick = { showImportConfirmation = false }) {
+                        Text(stringResource(R.string.cancel_button))
+                    }
+                }
+            )
+        }
+
+        if (showDeleteConfirmation) {
+            AlertDialog(
+                onDismissRequest = { showDeleteConfirmation = false },
+                title = { Text(stringResource(R.string.delete_tasks_dialog_title)) },
+                text = { Text(stringResource(R.string.delete_tasks_dialog_text, selectedIds.size)) },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showDeleteConfirmation = false
+                            viewModel.deleteDoneTasks(selectedIds)
+                        }
+                    ) {
+                        Text(stringResource(R.string.delete_confirm_button), color = MaterialTheme.colorScheme.error)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showDeleteConfirmation = false }) {
                         Text(stringResource(R.string.cancel_button))
                     }
                 }

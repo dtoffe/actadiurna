@@ -175,6 +175,14 @@ class TodoRepository(private val context: Context) {
         }
     }
 
+    suspend fun deleteDoneTasks(idsToDelete: Set<Int>) = withContext(Dispatchers.IO) {
+        val currentDone = _doneItems.value.toMutableList()
+        currentDone.removeAll { it.id in idsToDelete }
+        val newDoneRaw = TodoParser.generateRawContent(currentDone)
+        doneFile.writeText(newDoneRaw)
+        _doneItems.value = currentDone
+    }
+
     suspend fun unarchiveTasks(itemsToUnarchive: List<TodoItem>) = withContext(Dispatchers.IO) {
         // 1. Remove from doneItems
         val currentDone = _doneItems.value.toMutableList()

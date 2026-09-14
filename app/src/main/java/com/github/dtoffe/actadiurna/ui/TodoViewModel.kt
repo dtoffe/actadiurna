@@ -294,6 +294,14 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deleteDoneTasks(ids: Set<Int>) {
+        viewModelScope.launch {
+            repository.deleteDoneTasks(ids)
+            selectedDoneTasks.value = selectedDoneTasks.value - ids
+            snackbarMessage.value = getApplication<Application>().getString(R.string.task_deleted)
+        }
+    }
+
     fun archiveCompleted() {
         viewModelScope.launch {
             val count = repository.archiveCompletedTasks()

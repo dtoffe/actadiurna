@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">L\'importation d\'un nouveau fichier effacera définitivement toutes vos tâches actuelles dans todo.txt et les remplacera par le contenu du fichier importé. Cette action est irréversible.</string>
     <string name="import_confirm_button">Importer</string>
 
+    <string name="delete_tasks_dialog_title">Supprimer les tâches</string>
+    <string name="delete_tasks_dialog_text">Voulez-vous vraiment supprimer définitivement %1$d tâche(s) sélectionnée(s) ? Cette action est irréversible.</string>
+    <string name="delete_confirm_button">Supprimer</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Archive)</string>
     <string name="back_button">Retour</string>

@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">Das Importieren einer neuen Datei löscht dauerhaft alle Ihre aktuellen Aufgaben in todo.txt und ersetzt sie durch den Inhalt der importierten Datei. Diese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="import_confirm_button">Importieren</string>
 
+    <string name="delete_tasks_dialog_title">Aufgaben löschen</string>
+    <string name="delete_tasks_dialog_text">Sind Sie sicher, dass Sie %1$d ausgewählte Aufgabe(n) dauerhaft löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="delete_confirm_button">Löschen</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Archiv)</string>
     <string name="back_button">Zurück</string>

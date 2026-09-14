@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">Importar un nuevo archivo borrará permanentemente todas tus tareas actuales en todo.txt y las reemplazará con el contenido del archivo importado. Esta acción no se puede deshacer.</string>
     <string name="import_confirm_button">Importar</string>
 
+    <string name="delete_tasks_dialog_title">Borrar Tareas</string>
+    <string name="delete_tasks_dialog_text">¿Estás seguro de que quieres borrar permanentemente las %1$d tarea(s) seleccionada(s)? Esta acción no se puede deshacer.</string>
+    <string name="delete_confirm_button">Borrar</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Archivo)</string>
     <string name="back_button">Atrás</string>

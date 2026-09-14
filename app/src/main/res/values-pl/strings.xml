@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">Zaimportowanie nowego pliku spowoduje trwałe usunięcie wszystkich aktualnych zadań w todo.txt i zastąpienie ich zawartością importowanego pliku. Tej czynności nie można cofnąć.</string>
     <string name="import_confirm_button">Importuj</string>
 
+    <string name="delete_tasks_dialog_title">Usuń zadania</string>
+    <string name="delete_tasks_dialog_text">Czy na pewno chcesz trwale usunąć %1$d wybrane zadania? Tej czynności nie można cofnąć.</string>
+    <string name="delete_confirm_button">Usuń</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Archiwum)</string>
     <string name="back_button">Wstecz</string>

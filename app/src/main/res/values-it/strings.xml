@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">L\'importazione di un nuovo file cancellerà definitivamente tutte le tue attività attuali in todo.txt e le sostituirà con il contenuto del file importato. Questa azione non può essere annullata.</string>
     <string name="import_confirm_button">Importa</string>
 
+    <string name="delete_tasks_dialog_title">Elimina Attività</string>
+    <string name="delete_tasks_dialog_text">Sei sicuro di voler eliminare definitivamente le %1$d attività selezionate? Questa azione non può essere annullata.</string>
+    <string name="delete_confirm_button">Elimina</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Archivio)</string>
     <string name="back_button">Indietro</string>

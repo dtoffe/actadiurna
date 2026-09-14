@@ -26,6 +26,10 @@
     <string name="import_todo_dialog_text">Importing a new file will permanently wipe all your current tasks in todo.txt and replace them with the content of the imported file. This action cannot be undone.</string>
     <string name="import_confirm_button">Import</string>
 
+    <string name="delete_tasks_dialog_title">Delete Tasks</string>
+    <string name="delete_tasks_dialog_text">Are you sure you want to permanently delete %1$d selected task(s)? This action cannot be undone.</string>
+    <string name="delete_confirm_button">Delete</string>
+
     <!-- Done Screen -->
     <string name="archive_title">(Archive)</string>
     <string name="back_button">Back</string>
