@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
@@ -50,6 +51,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -75,10 +77,19 @@ fun DoneScreen(
     viewModel: TodoViewModel,
     onBack: () -> Unit
 ) {
+    val listState = rememberLazyListState()
     val items by viewModel.filteredDoneItems.collectAsState()
     val searchQuery by viewModel.doneSearchQuery.collectAsState()
     val sortBy by viewModel.doneSortBy.collectAsState()
     val selectedIds by viewModel.selectedDoneTasks.collectAsState()
+
+    // Scroll to top when sorting changes
+    LaunchedEffect(sortBy) {
+        if (items.isNotEmpty()) {
+            listState.animateScrollToItem(0)
+        }
+    }
+
     val showClearConfirmation by viewModel.showClearArchiveConfirmation.collectAsState()
     var showImportConfirmation by remember { mutableStateOf(false) }
 
@@ -338,6 +349,7 @@ fun DoneScreen(
                     }
                 } else {
                     LazyColumn(
+                        state = listState,
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)

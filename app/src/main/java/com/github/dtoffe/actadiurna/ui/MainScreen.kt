@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -29,6 +30,7 @@ import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
@@ -104,12 +106,20 @@ fun TodoListScreen(
 ) {
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
+    val listState = rememberLazyListState()
 
     val items by viewModel.filteredItems.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val selectedContext by viewModel.selectedContext.collectAsState()
     val selectedProject by viewModel.selectedProject.collectAsState()
     val sortBy by viewModel.sortBy.collectAsState()
+
+    // Scroll to top when sorting changes
+    LaunchedEffect(sortBy) {
+        if (items.isNotEmpty()) {
+            listState.animateScrollToItem(0)
+        }
+    }
 
     val allContexts by viewModel.allContexts.collectAsState()
     val allProjects by viewModel.allProjects.collectAsState()
@@ -341,6 +351,7 @@ fun TodoListScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         val sortOptions = listOf(
+                            SortBy.DUE_DATE to Icons.Default.DateRange,
                             SortBy.ALPHABETICAL to TodoIcons.SortAlpha,
                             SortBy.PRIORITY to Icons.Default.Star,
                             SortBy.PROJECT to TodoIcons.Project,
@@ -415,6 +426,7 @@ fun TodoListScreen(
                     }
                 } else {
                     LazyColumn(
+                        state = listState,
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
