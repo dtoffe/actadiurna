@@ -55,7 +55,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -157,9 +157,9 @@ fun TodoListScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 title = {
-                    Column {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = stringResource(R.string.app_name),
                             style = MaterialTheme.typography.titleLarge.copy(
@@ -167,6 +167,7 @@ fun TodoListScreen(
                                 fontFamily = FontFamily.Monospace
                             )
                         )
+                        Spacer(modifier = Modifier.height(5.dp))
                         val summary = buildAnnotatedString {
                             append("(")
                             append(stringResource(R.string.tasks_summary_total, totalCount))
@@ -442,8 +443,8 @@ fun TodoListScreen(
                     LazyColumn(
                         state = listState,
                         modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         items(items, key = { it.id }) { item ->
                             TaskItemCard(
@@ -486,8 +487,7 @@ fun TodoListScreen(
                 },
                 onProjectToggle = { task, prj ->
                     viewModel.toggleProject(task, prj)
-                },
-                modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars)
+                }
             )
         }
 
