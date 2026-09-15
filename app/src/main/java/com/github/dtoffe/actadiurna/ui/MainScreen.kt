@@ -70,9 +70,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.dtoffe.actadiurna.R
@@ -164,10 +167,28 @@ fun TodoListScreen(
                                 fontFamily = FontFamily.Monospace
                             )
                         )
+                        val summary = buildAnnotatedString {
+                            append("(")
+                            append(stringResource(R.string.tasks_summary_total, totalCount))
+                            append(" - ")
+                            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                                append(stringResource(R.string.tasks_summary_today, dueTodayCount))
+                            }
+                            append(" - ")
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (overdueCount > 0) MaterialTheme.colorScheme.error else Color.Unspecified
+                                )
+                            ) {
+                                append(stringResource(R.string.tasks_summary_overdue, overdueCount))
+                            }
+                            append(")")
+                        }
                         Text(
-                            text = stringResource(R.string.tasks_summary_format, totalCount, dueTodayCount, overdueCount),
+                            text = summary,
                             style = MaterialTheme.typography.labelSmall,
-                            color = if (overdueCount > 0) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 },

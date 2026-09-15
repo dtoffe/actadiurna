@@ -79,6 +79,7 @@ fun DoneScreen(
     onBack: () -> Unit
 ) {
     val listState = rememberLazyListState()
+    val doneItems by viewModel.doneItems.collectAsState()
     val items by viewModel.filteredDoneItems.collectAsState()
     val searchQuery by viewModel.doneSearchQuery.collectAsState()
     val sortBy by viewModel.doneSortBy.collectAsState()
@@ -108,7 +109,7 @@ fun DoneScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column {
                         Text(
                             text = stringResource(R.string.app_name),
                             style = MaterialTheme.typography.titleLarge.copy(
@@ -116,10 +117,9 @@ fun DoneScreen(
                                 fontFamily = FontFamily.Monospace
                             )
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = stringResource(R.string.archive_title),
-                            style = MaterialTheme.typography.labelMedium,
+                            text = stringResource(R.string.archived_summary, doneItems.size),
+                            style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
                         )
                     }
