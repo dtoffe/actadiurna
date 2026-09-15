@@ -123,6 +123,7 @@ fun TodoListScreen(
 
     val allContexts by viewModel.allContexts.collectAsState()
     val allProjects by viewModel.allProjects.collectAsState()
+    val totalCount by viewModel.totalCount.collectAsState()
     val dueTodayCount by viewModel.dueTodayCount.collectAsState()
     val overdueCount by viewModel.overdueCount.collectAsState()
 
@@ -155,7 +156,7 @@ fun TodoListScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column {
                         Text(
                             text = stringResource(R.string.app_name),
                             style = MaterialTheme.typography.titleLarge.copy(
@@ -163,20 +164,11 @@ fun TodoListScreen(
                                 fontFamily = FontFamily.Monospace
                             )
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = stringResource(R.string.today_tasks_count, dueTodayCount),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            text = stringResource(R.string.tasks_summary_format, totalCount, dueTodayCount, overdueCount),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = if (overdueCount > 0) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        if (overdueCount > 0) {
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = stringResource(R.string.overdue_tasks_count, overdueCount),
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        }
                     }
                 },
                 actions = {

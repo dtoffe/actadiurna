@@ -72,6 +72,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         itemList.asSequence().flatMap { it.projects }.distinct().sorted().toList()
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    // Total tasks count
+    val totalCount: StateFlow<Int> = items.map { it.size }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+
     // Today's due tasks count
     val dueTodayCount: StateFlow<Int> = items.map { itemList ->
         val today = TodoParser.todayDateString()

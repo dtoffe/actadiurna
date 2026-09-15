@@ -4,6 +4,7 @@
     <!-- Main Screen -->
     <string name="today_tasks_count">(%1$d per oggi)</string>
     <string name="overdue_tasks_count">(%1$d in ritardo)</string>
+    <string name="tasks_summary_format">(%1$d totale - %2$d oggi - %3$d in ritardo)</string>
     <string name="more_options">Altre opzioni</string>
     <string name="share_todo_file">Condividi file todo.txt</string>
     <string name="archive_completed_tasks">Archivia attività completate</string>
