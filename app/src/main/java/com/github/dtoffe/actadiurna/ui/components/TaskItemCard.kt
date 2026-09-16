@@ -46,12 +46,13 @@ fun TaskItemCard(
     sortBy: SortBy,
     isSelected: Boolean = false,
     enabled: Boolean = true,
+    colorIndex: Int = -1,
     onSelect: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val isOverdue = !item.isCompleted && item.dueDate != null && item.dueDate!! < TodoParser.todayDateString()
 
-    val highlightColor = remember(sortBy, item) {
+    val highlightColor = remember(sortBy, item, colorIndex) {
         if (item.isCompleted) return@remember null
         
         val tag = when (sortBy) {
@@ -68,9 +69,18 @@ fun TaskItemCard(
             Color(0xFFE0F2F1), // Teal 50
             Color(0xFFFFFDE7), // Yellow 50
             Color(0xFFFFEBEE), // Red 50
-            Color(0xFFEFEBE9), // Brown 50
+            Color(0xFFFCE4EC), // Pink 50
+            Color(0xFFE0F7FA), // Cyan 50
+            Color(0xFFFFF8E1), // Amber 50
+            Color(0xFFE8EAF6), // Indigo 50
+            Color(0xFFFBE9E7), // Deep Orange 50
         )
-        colors[kotlin.math.abs(tag.hashCode()) % colors.size]
+        
+        if (colorIndex >= 0) {
+            colors[colorIndex % colors.size]
+        } else {
+            colors[kotlin.math.abs(tag.hashCode()) % colors.size]
+        }
     }
 
     val cardBg by animateColorAsState(

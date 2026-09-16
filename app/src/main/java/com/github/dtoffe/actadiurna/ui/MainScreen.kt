@@ -130,6 +130,14 @@ fun TodoListScreen(
     val dueTodayCount by viewModel.dueTodayCount.collectAsState()
     val overdueCount by viewModel.overdueCount.collectAsState()
 
+    val distinctTags = remember(items, sortBy) {
+        when (sortBy) {
+            SortBy.PROJECT -> items.mapNotNull { it.projects.firstOrNull() }.distinct()
+            SortBy.CONTEXT -> items.mapNotNull { it.contexts.firstOrNull() }.distinct()
+            else -> emptyList()
+        }
+    }
+
     val editingTask by viewModel.editingTask.collectAsState()
     val selectedIds by viewModel.selectedTasks.collectAsState()
     val snackbarMessage by viewModel.snackbarMessage.collectAsState()
@@ -447,11 +455,20 @@ fun TodoListScreen(
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         items(items, key = { it.id }) { item ->
+                            val colorIndex = remember(item, sortBy, distinctTags) {
+                                val tag = when (sortBy) {
+                                    SortBy.PROJECT -> item.projects.firstOrNull()
+                                    SortBy.CONTEXT -> item.contexts.firstOrNull()
+                                    else -> null
+                                }
+                                if (tag != null) distinctTags.indexOf(tag) else -1
+                            }
                             TaskItemCard(
                                 item = item,
                                 onToggleCompletion = { viewModel.toggleCompletion(item) },
                                 sortBy = sortBy,
                                 isSelected = item.id in selectedIds,
+                                colorIndex = colorIndex,
                                 onSelect = {
                                     viewModel.toggleTaskSelection(item.id)
                                 }

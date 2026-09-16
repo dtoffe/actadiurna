@@ -96,6 +96,14 @@ fun DoneScreen(
     var showImportConfirmation by remember { mutableStateOf(false) }
     var showDeleteConfirmation by remember { mutableStateOf(false) }
 
+    val distinctTags = remember(items, sortBy) {
+        when (sortBy) {
+            SortBy.PROJECT -> items.mapNotNull { it.projects.firstOrNull() }.distinct()
+            SortBy.CONTEXT -> items.mapNotNull { it.contexts.firstOrNull() }.distinct()
+            else -> emptyList()
+        }
+    }
+
     val fileImportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
@@ -358,12 +366,21 @@ fun DoneScreen(
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         items(items, key = { it.id }) { item ->
+                            val colorIndex = remember(item, sortBy, distinctTags) {
+                                val tag = when (sortBy) {
+                                    SortBy.PROJECT -> item.projects.firstOrNull()
+                                    SortBy.CONTEXT -> item.contexts.firstOrNull()
+                                    else -> null
+                                }
+                                if (tag != null) distinctTags.indexOf(tag) else -1
+                            }
                             TaskItemCard(
                                 item = item,
                                 onToggleCompletion = { },
                                 sortBy = sortBy,
                                 isSelected = item.id in selectedIds,
                                 enabled = false,
+                                colorIndex = colorIndex,
                                 onSelect = {
                                     viewModel.toggleDoneTaskSelection(item.id)
                                 }
