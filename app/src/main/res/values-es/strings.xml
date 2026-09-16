@@ -73,6 +73,10 @@
     <string name="settings_title">Ajustes</string>
     <string name="language_selection_title">Idioma</string>
     <string name="system_default">Predeterminado del sistema</string>
+    <string name="persist_sort_title">Persistir Criterio de Ordenación</string>
+    <string name="persist_sort_description">Restaurar el último orden seleccionado al iniciar la aplicación. Si está desactivado, el valor predeterminado es Prioridad.</string>
+    <string name="yes_option">Sí</string>
+    <string name="no_option">No</string>
     <string name="help_title">Ayuda</string>
     <string name="help_toc_title">Contenidos</string>
     <string name="help_toc_todotxt">1. Formato todo.txt</string>

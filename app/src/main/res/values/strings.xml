@@ -73,6 +73,10 @@
     <string name="settings_title">Settings</string>
     <string name="language_selection_title">Language</string>
     <string name="system_default">System Default</string>
+    <string name="persist_sort_title">Persist Sort Criterion</string>
+    <string name="persist_sort_description">Restore last selected sort when starting the app. If disabled, defaults to Priority.</string>
+    <string name="yes_option">Yes</string>
+    <string name="no_option">No</string>
     <string name="help_title">Help</string>
     <string name="help_toc_title">Contents</string>
     <string name="help_toc_todotxt">1. todo.txt Format</string>

@@ -98,7 +98,7 @@ fun MainScreen(
     when (currentScreen) {
         Screen.MAIN -> TodoListScreen(viewModel)
         Screen.DONE -> DoneScreen(viewModel, onBack = { viewModel.currentScreen.value = Screen.MAIN })
-        Screen.SETTINGS -> SettingsScreen(onBack = { viewModel.currentScreen.value = viewModel.previousScreen.value })
+        Screen.SETTINGS -> SettingsScreen(viewModel, onBack = { viewModel.currentScreen.value = viewModel.previousScreen.value })
     }
 }
 

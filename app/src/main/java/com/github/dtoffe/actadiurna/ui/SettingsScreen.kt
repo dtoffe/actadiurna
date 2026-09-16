@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +36,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,6 +61,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
+    viewModel: TodoViewModel,
     onBack: () -> Unit
 ) {
     val uriHandler = LocalUriHandler.current
@@ -95,6 +98,22 @@ fun SettingsScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                     LanguageSelector()
+                    
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+
+                    Text(
+                        text = stringResource(R.string.persist_sort_title),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    Text(
+                        text = stringResource(R.string.persist_sort_description),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    PersistSortSelector(viewModel)
                 }
             }
 
@@ -224,6 +243,39 @@ fun LanguageSelector() {
                     modifier = Modifier.padding(start = 16.dp)
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun PersistSortSelector(viewModel: TodoViewModel) {
+    val persistSort by viewModel.persistSort.collectAsState()
+
+    Row(modifier = Modifier.selectableGroup()) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .selectable(
+                    selected = persistSort,
+                    onClick = { viewModel.setPersistSort(true) },
+                    role = Role.RadioButton
+                )
+                .padding(end = 16.dp)
+        ) {
+            RadioButton(selected = persistSort, onClick = null)
+            Text(text = stringResource(R.string.yes_option), modifier = Modifier.padding(start = 8.dp))
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .selectable(
+                    selected = !persistSort,
+                    onClick = { viewModel.setPersistSort(false) },
+                    role = Role.RadioButton
+                )
+        ) {
+            RadioButton(selected = !persistSort, onClick = null)
+            Text(text = stringResource(R.string.no_option), modifier = Modifier.padding(start = 8.dp))
         }
     }
 }

@@ -73,6 +73,10 @@
     <string name="settings_title">Einstellungen</string>
     <string name="language_selection_title">Sprache</string>
     <string name="system_default">Systemstandard</string>
+    <string name="persist_sort_title">Sortierkriterium beibehalten</string>
+    <string name="persist_sort_description">Stellt beim Start der App die zuletzt gewählte Sortierung wieder her. Wenn deaktiviert, ist die Priorität standardmäßig eingestellt.</string>
+    <string name="yes_option">Ja</string>
+    <string name="no_option">Nein</string>
     <string name="help_title">Hilfe</string>
     <string name="help_toc_title">Inhaltsverzeichnis</string>
     <string name="help_toc_todotxt">1. todo.txt-Format</string>

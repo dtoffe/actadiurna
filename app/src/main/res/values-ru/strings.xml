@@ -73,6 +73,10 @@
     <string name="settings_title">Настройки</string>
     <string name="language_selection_title">Язык</string>
     <string name="system_default">По умолчанию</string>
+    <string name="persist_sort_title">Сохранять критерий сортировки</string>
+    <string name="persist_sort_description">Восстанавливать последнюю выбранную сортировку при запуске приложения. Если отключено, по умолчанию используется Приоритет.</string>
+    <string name="yes_option">Да</string>
+    <string name="no_option">Нет</string>
     <string name="help_title">Справка</string>
     <string name="help_toc_title">Содержание</string>
     <string name="help_toc_todotxt">1. Формат todo.txt</string>

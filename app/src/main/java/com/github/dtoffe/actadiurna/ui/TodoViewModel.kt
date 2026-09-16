@@ -7,6 +7,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.dtoffe.actadiurna.R
+import com.github.dtoffe.actadiurna.data.SettingsManager
 import com.github.dtoffe.actadiurna.data.TodoRepository
 import com.github.dtoffe.actadiurna.model.SortBy
 import com.github.dtoffe.actadiurna.model.StatusFilter
@@ -37,6 +38,7 @@ enum class Screen {
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = TodoRepository(application)
+    private val settingsManager = SettingsManager(application)
 
     val items: StateFlow<List<TodoItem>> = repository.items
 
@@ -45,7 +47,11 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     val selectedProject = MutableStateFlow<String?>(null)
     val selectedPriority = MutableStateFlow<Char?>(null)
     val statusFilter = MutableStateFlow(StatusFilter.ALL)
-    val sortBy = MutableStateFlow(SortBy.PRIORITY)
+    val sortBy = MutableStateFlow(
+        if (settingsManager.persistSort) settingsManager.lastSort else SortBy.PRIORITY
+    )
+
+    val persistSort = MutableStateFlow(settingsManager.persistSort)
 
     val editingTask = MutableStateFlow<TodoItem?>(null)
     val selectedTasks = MutableStateFlow<Set<Int>>(emptySet())
@@ -365,10 +371,22 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun toggleSort(target: SortBy, isDoneScreen: Boolean = false) {
         val flow = if (isDoneScreen) doneSortBy else sortBy
-        if (target == SortBy.ALPHABETICAL || target == SortBy.ALPHABETICAL_DESC) {
-            flow.value = if (flow.value == SortBy.ALPHABETICAL) SortBy.ALPHABETICAL_DESC else SortBy.ALPHABETICAL
+        val newValue = if (target == SortBy.ALPHABETICAL || target == SortBy.ALPHABETICAL_DESC) {
+            if (flow.value == SortBy.ALPHABETICAL) SortBy.ALPHABETICAL_DESC else SortBy.ALPHABETICAL
         } else {
-            flow.value = target
+            target
+        }
+        flow.value = newValue
+        if (!isDoneScreen && settingsManager.persistSort) {
+            settingsManager.lastSort = newValue
+        }
+    }
+
+    fun setPersistSort(enabled: Boolean) {
+        persistSort.value = enabled
+        settingsManager.persistSort = enabled
+        if (enabled) {
+            settingsManager.lastSort = sortBy.value
         }
     }
 

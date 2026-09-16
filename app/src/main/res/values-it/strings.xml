@@ -73,6 +73,10 @@
     <string name="settings_title">Impostazioni</string>
     <string name="language_selection_title">Lingua</string>
     <string name="system_default">Predefinito di sistema</string>
+    <string name="persist_sort_title">Persisti Criterio di Ordinamento</string>
+    <string name="persist_sort_description">Ripristina l\'ultimo ordinamento selezionato all\'avvio dell\'app. Se disattivato, il valore predefinito è Priorità.</string>
+    <string name="yes_option">Sì</string>
+    <string name="no_option">No</string>
     <string name="help_title">Aiuto</string>
     <string name="help_toc_title">Sommario</string>
     <string name="help_toc_todotxt">1. Formato todo.txt</string>

@@ -73,6 +73,10 @@
     <string name="settings_title">Ustawienia</string>
     <string name="language_selection_title">Język</string>
     <string name="system_default">Domyślny systemowy</string>
+    <string name="persist_sort_title">Zapamiętaj kryterium sortowania</string>
+    <string name="persist_sort_description">Przywróć ostatnio wybrane sortowanie przy uruchamianiu aplikacji. Jeśli wyłączone, domyślnie sortuje według Priorytetu.</string>
+    <string name="yes_option">Tak</string>
+    <string name="no_option">Nie</string>
     <string name="help_title">Pomoc</string>
     <string name="help_toc_title">Spis treści</string>
     <string name="help_toc_todotxt">1. Format todo.txt</string>
